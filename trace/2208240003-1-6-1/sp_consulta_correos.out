@@ -1,0 +1,46 @@
+trace on
+
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+expression:(or (or (or (or (null pempresa), (= pempresa, "")), (or (null pnumcte), (= pnumcte, ""))), (or (null ptipocorreo), (= ptipocorreo, 0))), (or (null pconsulta), (= pconsulta, "")))
+evaluates to f 
+expression:
+  (select (count *)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumcte))
+evaluates to 1 ; 
+let vexistecte = 1 
+expression:(= vexistecte, 0)
+evaluates to f 
+expression:(= pconsulta, 0)
+evaluates to t 
+expression:
+  (select (nvl correo_elec, " "), tipo_correo, status_correo
+    from bdinteg:"informix".si_correos
+    where (and (and (= numcte, pnumcte), (= tipo_correo, ptipocorreo)), (= status_correo, "A")))
+evaluates to A ; 1 ; cliente@ejemplo.com                                                                                  ; 
+let vcorreoelec = cliente@ejemplo.com                                                                                  
+let vtipocorreo = 1 
+let vstatuscorreo = A 
+expression:vstatuscorreo
+evaluates to A 
+expression:vtipocorreo
+evaluates to 1 
+expression:vcorreoelec
+evaluates to cliente@ejemplo.com                                                                                  
+expression:vcodret1
+evaluates to 000   
+procedure sp_consulta_correos returns 000   , cliente@ejemplo.com                                                                                  , 1 , A 
+
+expression:(<procedure> bdinteg:sp_consulta_correos, "001", vcliente, "1", "0")
+evaluates to A ; 1 ; cliente@ejemplo.com                                                                                  ; 000   ; 
+let vcodretdatoscte = 000   
+let vcorreoelec = cliente@ejemplo.com                                                                                  
+let vtipocorreo = 1 
+let vstatuscorreo = A 
+
+execute function bdinteg:informix.sp_consulta_telefonos[procid=7731] ( pempresa = 001 ,  pnumcte = 066001551 ,  ptipotel = 2 ,  pconsulta = 0 )
+
+set debug file to "/resplogifx/repaclaraciones/ambientacion/sp_consulta_telefonos.out";

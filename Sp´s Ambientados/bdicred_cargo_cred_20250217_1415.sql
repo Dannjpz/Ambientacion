@@ -130,8 +130,9 @@ BEGIN
 	--TRACE ON;
 	--SET DEBUG FILE TO '/ifxsif01/aldo/etapas/PagosTDC/cargo_cred_'||p_NumCredito||'.out';
    --TRACE ON;
-   SET DEBUG FILE TO "/resplogifx/repaclaraciones/sp_cancelacion_tarjeta.out";
-   TRACE ON;
+
+   --SET DEBUG FILE TO "/resplogifx/repaclaraciones/cargo_cred.out";
+   --TRACE ON;
  
    IF wbegin = "S" THEN
       COMMIT WORK;

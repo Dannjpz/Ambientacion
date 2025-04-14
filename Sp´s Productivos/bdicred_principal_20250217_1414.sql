@@ -1,9 +1,11 @@
-
-
-
-
-
-
+DROP PROCEDURE IF EXISTS "informix".principal( CHAR(3),
+                                        CHAR(20),
+                                            SMALLINT,
+                                             MONEY(14,2),
+                                           CHAR(8),
+                                          CHAR(4),
+                           CHAR,
+                           CHAR);
 
 CREATE PROCEDURE "informix".principal(p_Empresa  CHAR(3),
                            p_NumCredito             CHAR(20),
@@ -312,6 +314,8 @@ CREATE PROCEDURE "informix".principal(p_Empresa  CHAR(3),
   --SET DEBUG FILE TO "/RESPALDOSNEW/ulises/RQI/principal.out";
   --TRACE ON;
 
+   --SET DEBUG FILE TO "/resplogifx/repaclaraciones/principal.out";
+   --TRACE ON;
 
 	SET ISOLATION TO DIRTY READ;
 	SET LOCK MODE TO WAIT 3;

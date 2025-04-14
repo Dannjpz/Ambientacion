@@ -1,9 +1,21 @@
-
-
-
-
-
-
+DROP PROCEDURE IF EXISTS "informix".genmov_tc(
+                   VARCHAR(3),
+               VARCHAR(20),
+              VARCHAR(4),
+                 DATE,
+                     MONEY(14,2),
+                  VARCHAR(16),
+                  VARCHAR(4),
+                    VARCHAR(2),
+              VARCHAR(4),
+                   VARCHAR(20),
+                VARCHAR(40),
+               DECIMAL(14,6),
+                 DECIMAL(14,2),
+                   CHAR(8),
+   		    CHAR(4),
+   	  	    VARCHAR(20),
+   	    VARCHAR(23));
 
 CREATE PROCEDURE "informix".genmov_tc(
    p_empresa                VARCHAR(3),
@@ -53,7 +65,12 @@ DEFINE ISAM_ERR    INTEGER;
 DEFINE ERROR_INFO  VARCHAR(80);
 DEFINE vcadena     INTEGER;
 
+	--SET DEBUG FILE TO "/resplogifx/repaclaraciones/genmov_tc.out";
+	--TRACE ON;
+
 BEGIN
+
+
    ON EXCEPTION SET SQL_ERR, ISAM_ERR, ERROR_INFO
       LET P_COD_RET  = SQL_ERR;
       LET P_MENSAJE  = ERROR_INFO;

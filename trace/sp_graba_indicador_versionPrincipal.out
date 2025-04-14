@@ -1,0 +1,154 @@
+trace on
+
+expression:(date 1)
+evaluates to 01/01/1900 
+let vfecprimercompra = 01/01/1900 
+let vmtoprimercompra = 0 
+let vtransprimercompra =  
+let vfecprimerdisp = NULL. 
+let vmontoprimerdisp = NULL. 
+let vtransprimerdisp =  
+let vfolioultpago =  
+let vfolioposdisp =  
+let vfolioatmdisp =  
+let vfoliovntdisp =  
+expression:(date 1)
+evaluates to 01/01/1900 
+let vfecultpago = 01/01/1900 
+let vmtoultpago = 0 
+let vtransultpago =  
+let vfolioultpago =  
+let vatmdispmto = 0 
+expression:(date 1)
+evaluates to 01/01/1900 
+let vatmdispfec = 01/01/1900 
+let vatmdisptransacc =  
+let vfolioatmdisp =  
+let vposdispmto = 0 
+expression:(date 1)
+evaluates to 01/01/1900 
+let vposdispfecha = 01/01/1900 
+let vposdisptransacc =  
+let vvntdispmto = 0 
+expression:(date 1)
+evaluates to 01/01/1900 
+let vvntdispfec = 01/01/1900 
+expression:(date 1)
+evaluates to 01/01/1900 
+let vfecultpagorev = 01/01/1900 
+let vmtoultpagorev = 0 
+let vtransultpagorev =  
+let vfolioultpagorev =  
+let vatmdispmtorev = 0 
+expression:(date 1)
+evaluates to 01/01/1900 
+let vatmdispfecrev = 01/01/1900 
+let vatmdisptransaccrev =  
+let vfolioatmdisprev =  
+let vposdispmtorev = 0 
+expression:(date 1)
+evaluates to 01/01/1900 
+let vposdispfecrev = 01/01/1900 
+let vposdisptransaccrev =  
+let vfolioposdisprev =  
+let vvntdispmtorev = 0 
+expression:(date 1)
+evaluates to 01/01/1900 
+let vvntdispfecrev = 01/01/1900 
+let vfoliovntdisprev =  
+let bcontinua = V 
+let vlsentido =  
+let vmtoreversion = 0 
+let vlnumvencidos = 0 
+let vrevpago =  
+let vrevatm =  
+let vrevpos =  
+let vrevvtn =  
+let vlnum_avisos = 0 
+let vlsaldomaximo = 0 
+let vindfico =  
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+expression:
+  (select f_primer_compra, monto_primer_compra, trans_primer_compra, f_primer_disp, monto_primer_disp, trans_primer_disp, (nvl folio_ultimo_pago, ""), (nvl folio_pos_disp, ""), (nvl folio_atm_disp, ""), fecha_ultimo_pago, monto_ultimo_pago, trans_ultimo_pago, (nvl folio_ultimo_pago, ""), atm_disp_monto, atm_disp_fecha, atm_disp_transacc, pos_disp_monto, pos_disp_fecha, pos_disp_transacc, vnt_disp_monto, vnt_disp_fecha, (nvl folio_vnt_disp, ""), fecha_ultimo_pago_rev, monto_ultimo_pago_rev, trans_ultimo_pago_rev, (nvl folio_ultimo_pago_rev, ""), atm_disp_monto_rev, atm_disp_fecha_rev, atm_disp_transacc_rev, (nvl folio_atm_disp_rev, ""), pos_disp_monto_rev, pos_disp_fecha_rev, pos_disp_transacc_rev, (nvl folio_pos_disp_rev, ""), vnt_disp_monto_rev, vnt_disp_fecha_rev, (nvl folio_vnt_disp_rev, "")
+    from bdicred:sd_indicador_cred
+    where (and (= empresa, pempresa), (= num_credito, pnumcredito)))
+evaluates to ATM2025-04-08 16 ; 04/08/2025 ; 1000.00 ;  ; NULL. ; NULL. ; NULL. ;                  ; NULL. ; NULL. ; NULL. ;  ; NULL. ; NULL. ; NULL. ; VENC2025-04-08 1 ; 04/08/2025 ; 500.00 ; NULL. ; NULL. ; NULL. ; 6952 ; 11/08/2024 ; 6000.00 ;  ; NULL. ; NULL. ; NULL. ; 6952_002_113     ;  ;  ; 6952 ; 6000.00 ; 11/08/2024 ; NULL. ; NULL. ; NULL. ; 
+let vfecprimercompra = NULL. 
+let vmtoprimercompra = NULL. 
+let vtransprimercompra = NULL. 
+let vfecprimerdisp = 11/08/2024 
+let vmontoprimerdisp = 6000.00 
+let vtransprimerdisp = 6952 
+let vfolioultpago =  
+let vfolioposdisp =  
+let vfolioatmdisp = 6952_002_113     
+let vfecultpago = NULL. 
+let vmtoultpago = NULL. 
+let vtransultpago = NULL. 
+let vfolioultpago =  
+let vatmdispmto = 6000.00 
+let vatmdispfec = 11/08/2024 
+let vatmdisptransacc = 6952 
+let vposdispmto = NULL. 
+let vposdispfecha = NULL. 
+let vposdisptransacc = NULL. 
+let vvntdispmto = 500.00 
+let vvntdispfec = 04/08/2025 
+let vfoliovntdisp = VENC2025-04-08 1 
+let vfecultpagorev = NULL. 
+let vmtoultpagorev = NULL. 
+let vtransultpagorev = NULL. 
+let vfolioultpagorev =  
+let vatmdispmtorev = NULL. 
+let vatmdispfecrev = NULL. 
+let vatmdisptransaccrev = NULL. 
+let vfolioatmdisprev =                  
+let vposdispmtorev = NULL. 
+let vposdispfecrev = NULL. 
+let vposdisptransaccrev = NULL. 
+let vfolioposdisprev =  
+let vvntdispmtorev = 1000.00 
+let vvntdispfecrev = 04/08/2025 
+let vfoliovntdisprev = ATM2025-04-08 16 
+expression:(dbinfo-sqlca.sqlerrd2 )
+evaluates to 1 
+let vcantreg = 1 
+expression:(= vcantreg, 0)
+evaluates to f 
+expression:
+  (select indicador, canal, sentido, indicador_fico
+    from bdicred:sd_transfun
+    where (or (and (= transacc, ptransacc), (<> transacc, "")), (and (= codigo_fun, pcodigofun), (= codigo_ref, pcodigoref))))
+evaluates to NULL. ; NULL. ; NULL. ; NULL. ; 
+let vpagocliente = NULL. 
+let vtipotrans = NULL. 
+let vlsentido = NULL. 
+let vindfico = NULL. 
+expression:(= vlsentido, "C")
+evaluates to NULL. 
+expression:(= vlsentido, "C")
+evaluates to NULL. 
+expression:(= vlsentido, "A")
+evaluates to NULL. 
+expression:pmonto
+evaluates to 1000.00 
+let vmtoacumulado = 1000.00 
+let vnumtrans = 1 
+expression:(and (= pindicador, 3), (= bcontinua, "V"))
+evaluates to f 
+expression:(= pindicador, 5)
+evaluates to f 
+expression:(= bcontinua, "V")
+evaluates to t 
+expression:(= pindicador, 5)
+evaluates to f 
+expression:(= vpagocliente, "V")
+evaluates to NULL. 
+expression:ccod_ret
+evaluates to 000    
+procedure sp_graba_indicador returns 000    
+
+iteration of cursory procedure sp_graba_indicador

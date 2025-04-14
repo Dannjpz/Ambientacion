@@ -1,0 +1,167 @@
+trace on
+
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+
+begin work;
+expression:(or (null pfoliosuac), (= pfoliosuac, ""))
+evaluates to f 
+expression:(or (null pdictamen), (= pdictamen, ""))
+evaluates to f 
+expression:(or (null pcalculainteres), (= pcalculainteres, ""))
+evaluates to f 
+expression:
+  (select fecha_hoy
+    from bdicheq:sc_fechas
+    where (= empresa, pempresa))
+evaluates to 04/04/2025 ; 
+let pfecha = 04/04/2025 
+expression:(= pdictamen, "NP")
+evaluates to f 
+
+commit work;
+
+begin work;
+expression:(= pdictamen, "CM")
+evaluates to f 
+
+commit work;
+
+begin work;
+expression:
+  (select fky_tipo_producto
+    from bdiaclaracion:acl_producto as a, bdiaclaracion:acl_aclaracion as b
+    where (and (= b.fky_producto, a.pky_producto), (= folio_csuac, pfoliosuac)))
+evaluates to 15 ; 
+let tproducto = 15 
+expression:(= tproducto, 4)
+evaluates to f 
+expression:(and (and (= pcalculainteres, 1), (in pdictamen, "AA", "AS", "PR")), (<> tproducto, 3))
+evaluates to t 
+expression:
+  (select trans_procede, pky_tipo_movimiento, fky_tipo_transaccion
+    from bdiaclaracion:acl_tipo_movimiento
+    where (= fky_tipo_transaccion, 10))
+evaluates to 10 ; 332 ; 0340 ; 
+let ctrannopro = 0340 
+let ipky_tipo_movimiento = 332 
+let ifky_tipo_transaccion = 10 
+expression:
+  (select a.fky_aclaracion, a.fky_producto, a.pky_movimiento, b.numero_cuenta, monto, (date fechahora)
+    from bdiaclaracion:acl_movimiento as a, bdiaclaracion:acl_producto as b
+    where (and (and (and (= b.pky_producto, a.fky_producto), (null a.fky_padre)), (= duplicado, 0)), (= folio_csuac, pfoliosuac)))
+evaluates to NULL. ; NULL. ; NULL. ; NULL. ; NULL. ; NULL. ; 
+let ifky_aclaracion = NULL. 
+let ifky_producto = NULL. 
+let ipky_movimiento = NULL. 
+let cnumcuenta = NULL. 
+let cmontoacla = NULL. 
+let ifechahora = NULL. 
+expression:
+  (select fky_tipo_movimiento
+    from bdiaclaracion:acl_movimiento
+    where (and (= fky_tipo_movimiento, 332), (= folio_csuac, pfoliosuac)))
+evaluates to NULL. ; 
+let v_pky_tipo_movimiento = NULL. 
+let v_nombre_sp = sp_calculaintaclaraciones 
+expression:
+  (select (dbinfo-utc_to_datetime sh_curtime)
+    from sysmaster:sysshmvals)
+evaluates to 2025-04-11 11:30:40 ; 
+let horaactual = 2025-04-11 11:30:40 
+
+execute function bdicheq:informix.sp_calculaintaclaraciones[procid=4591] ( pfechaini = NULL. ,  pfechafin = 04/11/2025 ,  pcuenta = NULL. ,  pmonto = NULL. )
+
+set isolation to dirty read;
+expression:(or (or (or (or (or (or (null pfechaini), (= pfechaini, "")), (null pfechafin)), (= pfechafin, "")), (<= pfechafin, pfechaini)), (or (or (null pmonto), (= pmonto, "")), (<= pmonto, 0.0))), (or (null pcuenta), (= pcuenta, "")))
+evaluates to t 
+let vcodret1 = 100 
+expression:vmonto_calc
+evaluates to $0.00 
+expression:vcodret1
+evaluates to 100   
+procedure sp_calculaintaclaraciones returns 100   , $0.00 
+
+expression:(<procedure> sp_calculaintaclaraciones, ifechahora, current year to fraction(3), cnumcuenta, cmontoacla)
+evaluates to $0.00 ; 100   ; 
+let dcodret_a = 100   
+let iintereses = $0.00 
+expression:(<> dcodret_a, "000")
+evaluates to t 
+
+insert into informix.aplicaaclaradebito_control_errores(cod_retorno, nombre_sp, num_cuenta, folio_csuac, fecha_insert)
+  values (dcodret_a, v_nombre_sp, cnumcuenta, pfoliosuac, horaactual);
+expression:(null v_pky_tipo_movimiento)
+evaluates to t 
+
+insert into bdiaclaracion:acl_movimiento
+  values (bdiaclaracion:movimiento_seq.nextval, 1, 0,  <NULL> , 0,  <NULL> ,  <NULL> , current year to fraction(3), pfoliosuac,  <NULL> ,  <NULL> ,  <NULL> ,  <NULL> , iintereses, iintereses, 0, ctrannopro, 1, "", "", 0, csecuencia_acl_mov,  <NULL> , ipky_movimiento, ifky_producto,  <NULL> ,  <NULL> , ipky_tipo_movimiento,  <NULL> ,  <NULL> , "9250",  <NULL> , 0, 0);
+exception : looking for handler
+SQL error = -391 ISAM error = 0  error string =  = "acl_movimiento.fky_producto"
+exception : handler FOUND
+expression:sql_err
+evaluates to -391 
+let ccodret = -391 
+exception : looking for handler
+SQL error = -1207 ISAM error = 0  error string =  = ""
+exception : no appropriate handler
+exception : looking for handler
+SQL error = -1207 ISAM error = 0  error string =  = ""
+exception : handler FOUND
+expression:sql_err
+evaluates to -1207 
+let ccodret = -1207 
+expression:(null vresultado)
+evaluates to f 
+expression:(|| (|| TRIM ( BOTH ' ' FROM vresultado), "-"), "Proceso Fallido")
+evaluates to Predictaminado-Proceso Fallido 
+let vresultado = Predictaminado-Proceso Fallido 
+expression:(= 
+  (select 1
+    from acl_cierre_masivo
+    where (and (= folio_csuac, vfoliocsuac), (= fecha, vfechaactual))), 1)
+evaluates to t 
+
+update acl_cierre_masivo set
+    (proceso) = (vresultado)
+  where (and (= folio_csuac, vfoliocsuac), (= fecha, vfechaactual));
+expression:vresultado
+evaluates to Predictaminado-Proceso Fallido                     
+expression:vfoliocsuac
+evaluates to 2610241719  
+expression:ccodret
+evaluates to -1207  
+procedure sp_aplica_cierre_masivo returns -1207  , 2610241719  , Predictaminado-Proceso Fallido                     
+
+expression:(<procedure> "informix".sp_aplica_cierre_masivo, v_folio_csuac, v_procedente, vcodresolucion, 1, "330646", v_dictamen, v_num_proceso, v_afectacion)
+evaluates to Predictaminado-Proceso Fallido                     ; 2610241719  ; -1207  ; 
+let v_cod_ret = -1207  
+let vfoliocsuac = 2610241719  
+let vresultado = Predictaminado-Proceso Fallido                     
+expression:
+  (select pky_aclaracion, fky_estatus_aclaracion, fky_estatus_corp_general
+    from "informix".acl_aclaracion
+    where (= folio_csuac, v_folio_csuac))
+evaluates to 5 ; 1 ; 2475465 ; 
+let v_pky_aclaracion = 2475465 
+let v_estatus_aclaracion = 1 
+let v_estatus_general = 5 
+expression:(not-null v_pky_aclaracion)
+evaluates to t 
+
+insert into "informix".acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, v_bitacora, current year to fraction(3), v_folio_csuac, 26, v_pky_aclaracion,  <NULL> , v_estatus_aclaracion,  <NULL> , v_estatus_general, 1);
+expression:(not-null v_cod_ret)
+evaluates to t 
+
+commit work;
+select cursor iteration.
+end cursor
+let v_cod_ret = 00000 
+expression:v_cod_ret
+evaluates to 00000  
+procedure sp_cierres_masivos_afectacion returns 00000  
+
+iteration of cursory procedure sp_cierres_masivos_afectacion

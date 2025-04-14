@@ -1,0 +1,167 @@
+trace on
+
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+expression:(or (or (or (null pempresa), (= pempresa, "")), (or (null pnumcte), (= pnumcte, ""))), (or (null ptipotel), (= ptipotel, 0)))
+evaluates to f 
+expression:
+  (select (count *)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumcte))
+evaluates to 1 ; 
+let vexistecte = 1 
+expression:(= vexistecte, 0)
+evaluates to f 
+expression:(= pconsulta, "0")
+evaluates to t 
+expression:
+  (select telefono, tipo_tel, secuencia, status_tel, extension, carrier, contacto, cofetel
+    from bdinteg:"informix".si_telefonos_actual
+    where (and (and (= numcte, pnumcte), (= tipo_tel, ptipotel)), (= status_tel, "A")))
+evaluates to S ; 1 ; 1 ;       ; A ; 1 ; 2 ; 5512345678    ; 
+let vtelefono = 5512345678    
+let vtipotel = 2 
+let vsecuencia = 1 
+let vstatus_tel = A 
+let vextension =       
+let vcarrier = 1 
+let vcontacto = 1 
+let vcofetel = S 
+expression:
+  (select (nvl nombre_carrier, " ")
+    from bdinteg:"informix".si_carriers
+    where (= cve_carrier, vcarrier))
+evaluates to TELCEL                         ; 
+let vnombrecarrier = TELCEL                         
+expression:(null vnombrecarrier)
+evaluates to f 
+expression:(= vcofetel, "V")
+evaluates to f 
+let statusvalidacion = 0 
+expression:statusvalidacion
+evaluates to 0 
+expression:vnombrecarrier
+evaluates to TELCEL                         
+expression:vcarrier
+evaluates to 1 
+expression:vextension
+evaluates to       
+expression:vstatus_tel
+evaluates to A 
+expression:vsecuencia
+evaluates to 1 
+expression:vtipotel
+evaluates to 2 
+expression:vtelefono
+evaluates to 5512345678    
+expression:vcodret1
+evaluates to 000   
+procedure sp_consulta_telefonos returns 000   , 5512345678    , 2 , 1 , A ,       , 1 , TELCEL                         , 0 
+
+expression:(<procedure> bdinteg:sp_consulta_telefonos, "001", vcliente, "2", "0")
+evaluates to 0 ; TELCEL               ; 1 ;       ; A ; 1 ; 2 ; 5512345678    ; 000   ; 
+let vcodretdatoscte = 000   
+let vtelefono = 5512345678    
+let vtipotel = 2 
+let vsecuencia = 1 
+let vstatus_tel = A 
+let vextension =       
+let vcarrier = 1 
+let vnombrecarrier = TELCEL               
+let statusvalidacion = 0 
+expression:
+  (select tpro.tipo_producto, pro.numero_cuenta, tpro.producto
+    from acl_aclaracion as acl, acl_producto as pro, acl_tipo_producto as tpro
+    where (= pky_aclaracion, vidaclaracion))
+evaluates to 2000 ; 10331830181 ; 2 ; 
+let vtipoproducto = 2 
+let vcuenta = 10331830181 
+let v_producto = 2000 
+expression:(not-null vdictamen)
+evaluates to t 
+expression:(= vtipoproducto, "1")
+evaluates to f 
+expression:(= vtipoproducto, "2")
+evaluates to t 
+
+execute function bdicheq:informix.sp_aplicaaclaradebito[procid=4549] ( pempresa = 001 ,  pfoliosuac = 2208240003  ,  pdictamen = PR ,  pcalculainteres = 1 ,  pempleadoaut = 330646   )
+let ccodret = 000 
+expression:(date 1)
+evaluates to 01/01/1900 
+let pfechamov = 01/01/1900 
+expression:(date 1)
+evaluates to 01/01/1900 
+let pfechaacl = 01/01/1900 
+expression:(date 1)
+evaluates to 01/01/1900 
+let pfechaaux = 01/01/1900 
+expression:(date 1)
+evaluates to 01/01/1900 
+let pfecha = 01/01/1900 
+let ctrans_no_procede =  
+let mcosto = 0 
+let ifky_aclaracion = 0 
+let ifky_producto = 0 
+let ipky_tipo_movimiento = 0 
+let v_pky_tipo_movimiento = 0 
+let ipky_movimiento = 0 
+let fipky_tipo_movimiento = 0 
+let v_numero_transaccion =  
+let es_nacional =  
+let v_nombre_origen =  
+let v_origenevento =  
+let v_numtarjeta =  
+let v_foliosuc =  
+let ifky_tipo_transaccion = 0 
+let ifechahora =  
+let iintereses = 0 
+let dcodret_a =  
+let dcodret_c =  
+let dtranret_c =  
+let dfechoy_c =  
+let dvsdodisp_c = 0 
+let dvmontoret_c = 0 
+let cnumcuenta =  
+let tproducto = 0 
+let cnumtarjeta =  
+let cmontoacla = 0 
+let csucursal =  
+let pintvig = 0 
+let pintvenc = 0 
+let diasperi = 0 
+let pintboni = 0 
+let pintcap = 0 
+let pivacap = 0 
+let cmensaje =  
+let csecuencia = 0 
+let ctrannopro =  
+let ctransinauto =  
+let ctranpro =  
+let ctranauto =  
+let ccargo = 0 
+let ptranaplica = 0000 
+let wbegin = N 
+let v_contador = 0 
+let pfoliosuacsuc =  
+let v_fecha_folio =  
+let csecuencia_acl_mov = 0 
+expression:(date 1)
+evaluates to 01/01/1900 
+let fecha_captura = 01/01/1900 
+let v_contador_0 = 0 
+let v_contador_1 = 0 
+let v_contador_2 = 0 
+let v_contador_total = 0 
+let v_fky_padre = 0 
+let v_monto = 0 
+let v_montoprocedente = 0 
+let v_fky_tipo_evento = 0 
+let v_duplicado = 0 
+let v_tipo_fky_padre = 0 
+let v_nombre_sp =  
+let horaactual = NULL. 
+let v_usuario = informix 
+
+set debug file to "/tmp/mfinis/Carlos/Optimización_spls_Aclaraciones/sp_aplicaaclaradebito.out";

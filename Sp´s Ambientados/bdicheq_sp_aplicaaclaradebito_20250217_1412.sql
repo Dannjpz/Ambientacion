@@ -1,8 +1,4 @@
-
-
-
-
-
+DROP PROCEDURE IF EXISTS "informix".sp_aplicaaclaradebito( CHAR(3),  CHAR(10),  CHAR(2),  CHAR(1),  CHAR (8));
 
 
 CREATE PROCEDURE "informix".sp_aplicaaclaradebito(pEmpresa CHAR(3), pFolioSuac CHAR(10), pDictamen CHAR(2), pCalculaInteres CHAR(1), pEmpleadoAut CHAR (8))
@@ -227,6 +223,9 @@ RETURNING CHAR(3);
    --SET DEBUG FILE TO "/informix/VJMP/sp_aplicaaclaradebito_des"||"_"||""||TRIM(pFolioSuac)||""||"_35.out";
    --SET DEBUG FILE TO "/aplicacion/pisabanco/pisa_ftes/syndein/img/InterAct/cfg/sp_aplicaaclaradebito_des"||"_N_"||""||TRIM(pFolioSuac)||""||"_35.out"; --> TRACE DESDE APP
    --TRACE ON;
+
+   	SET DEBUG FILE TO "/resplogifx/Dann/sp_aplicaaclaradebito.out";
+	TRACE ON;
 
    SET ISOLATION TO DIRTY READ;
    SET LOCK MODE TO WAIT 3;

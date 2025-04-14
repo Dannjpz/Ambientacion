@@ -1,7 +1,7 @@
-DROP PROCEDURE IF EXISTS "informix".sp_cierres_masivos_afectacion_2();
+DROP PROCEDURE IF EXISTS "informix".sp_cierres_masivos_afectacion();
 
 
-CREATE PROCEDURE "informix".sp_cierres_masivos_afectacion_2()
+CREATE PROCEDURE "informix".sp_cierres_masivos_afectacion()
 						
 	RETURNING	CHAR(5) AS codigo_ret;
 	--	VARCHAR(150)		AS Mensaje;
@@ -63,7 +63,7 @@ CREATE PROCEDURE "informix".sp_cierres_masivos_afectacion_2()
 	SET ISOLATION TO DIRTY READ;
 	SET LOCK MODE TO WAIT 3;
 	
-	SET DEBUG FILE TO "/resplogifx/repaclaraciones/archivo_2_cierre masivos.out";
+	SET DEBUG FILE TO "/resplogifx/Dann/sp_cierre masivos_afectacion.out";
 	TRACE ON;
 	
 	BEGIN

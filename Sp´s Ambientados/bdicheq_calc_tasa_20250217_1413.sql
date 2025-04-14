@@ -1,9 +1,7 @@
-
-
-
-
-
-
+DROP PROCEDURE IF EXISTS "informix".calc_tasa(  CHAR(3),
+                                           CHAR(8),
+                                        CHAR(2),
+                                          MONEY(14,2) );
 
 CREATE PROCEDURE "informix".calc_tasa( pempresa CHAR(3),
                                        ptasa    CHAR(8),
@@ -18,7 +16,7 @@ RETURNING CHAR(5), DECIMAL(9,6), DECIMAL(14,2);
     -- Creado por:          Alejandro Rueda Sanchez
     -- ModIFicado por:
     -- Ultima ModIFicacion: Mayo-2008
-    --                      Creación de SPL
+    --                      Creaciï¿½n de SPL
     -- *************************************************************
     
     DEFINE GLOBAL vgTasaVar        CHAR(1)      DEFAULT "";
@@ -58,8 +56,8 @@ RETURNING CHAR(5), DECIMAL(9,6), DECIMAL(14,2);
     LET puntos     = 0;
     LET vMtoInt    = 0;
     
-    --- set debug file to "/resplogifx/conciliachq/calc_tasa.out";
-    --- trace on;
+     set debug file to "/resplogifx/Dann/calc_tasa.out";
+     trace on;
     
     SET ISOLATION TO DIRTY READ;
 

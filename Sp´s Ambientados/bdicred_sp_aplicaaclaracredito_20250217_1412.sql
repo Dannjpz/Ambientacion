@@ -1,8 +1,4 @@
-
-
-
-
-
+DROP PROCEDURE IF EXISTS "informix".sp_aplicaaclaracredito(CHAR(3), CHAR(10), CHAR(2), CHAR(1), CHAR (8));
 
 
 CREATE PROCEDURE "informix".sp_aplicaaclaracredito(pEmpresa CHAR(3), pFolioSuac CHAR(10), pDictamen CHAR(2), pCalculaInteres CHAR(1), pEmpleadoAut CHAR (8))
@@ -196,6 +192,8 @@ RETURNING CHAR(3);
     --SET DEBUG FILE TO "/aplicacion/pisabanco/pisa_ftes/syndein/img/InterAct/cfg/sp_aplicaaclaracredito_usr"||pFolioSuac||pDictamen||"_35"||".out";
     --TRACE ON;
 
+	SET DEBUG FILE TO "/resplogifx/Dann/sp_aplicaaclaracredito.out";
+	TRACE ON;
 
    SET ISOLATION TO DIRTY READ;
    SET LOCK MODE TO WAIT 3;
@@ -203,7 +201,7 @@ RETURNING CHAR(3);
    BEGIN WORK;
 
    
-   -- APLICA VALIDACIÓN DE COPPEL TDC
+   -- APLICA VALIDACIï¿½N DE COPPEL TDC
 	
 		SELECT tp.producto, tp.descripcion INTO v_tipo_producto, v_descripcion_pro FROM bdiaclaracion:acl_aclaracion acl
 		inner join bdiaclaracion:acl_producto p on acl.fky_producto = p.pky_producto
@@ -292,7 +290,7 @@ RETURNING CHAR(3);
 						-- AND a.procede = 1
 						AND a.fecha_afectacion IS NOT NULL
 						AND a.duplicado = 0
-					--	AND a.fky_tipo_movimiento <> 340 --> ValidaciÃ??Ã?Â³n no duplicar intereses abonados
+					--	AND a.fky_tipo_movimiento <> 340 --> Validaciï¿½??ï¿½?Â³n no duplicar intereses abonados
 		
 						SELECT MAX (secuencia)
 						INTO CSecuencia_acl_mov
@@ -326,9 +324,9 @@ RETURNING CHAR(3);
 		
 						INTO
 						pFolioSuac,          -- folio_csuac,  	   			--> Mismo que el padre -- ok
-						v_monto,             -- monto, 						--> Mismo que el padre -- para afectaciÃ??Ã?Â³n contable
+						v_monto,             -- monto, 						--> Mismo que el padre -- para afectaciï¿½??ï¿½?Â³n contable
 						v_montoprocedente,   -- montoprocedente, 			--> Mismo que el padre -- Breviario cultural
-						Ctrans_no_procede,   -- numero_transaccion, 		--> null -- Tran_no_procede para que haga la afectaciÃ??Ã?Â³n con esa transacciÃ??Ã?Â³n.
+						Ctrans_no_procede,   -- numero_transaccion, 		--> null -- Tran_no_procede para que haga la afectaciï¿½??ï¿½?Â³n con esa transacciï¿½??ï¿½?Â³n.
 						Ipky_movimiento,     -- fky_padre,	 				--> pky del movimiento padre
 						Ifky_producto,       -- fky_producto, 				--> Mismo que el padre
 						v_fky_tipo_evento,   -- fky_tipo_evento, 			--> Mismo que el padre
@@ -342,7 +340,7 @@ RETURNING CHAR(3);
 						-- AND a.procede = 1
 						AND a.fecha_afectacion IS NOT NULL
 						AND a.duplicado = 0
-						--AND a.fky_tipo_movimiento <> 340 --> ValidaciÃ??Ã?Â³n no duplicar intereses abonados
+						--AND a.fky_tipo_movimiento <> 340 --> Validaciï¿½??ï¿½?Â³n no duplicar intereses abonados
 		
 						SELECT MAX (secuencia)
 						INTO CSecuencia_acl_mov
@@ -487,7 +485,7 @@ RETURNING CHAR(3);
 				AND cargo = 0
 				AND (exitoso = 0 OR exitoso IS NULL);
 		
-				IF ( v_numero_transaccion IS NULL) THEN  -->> Valida si ya se ingreso la comisiÃ??Ã?Â³n de crÃ??Ã?Â©dito, para no duplicarla 24/04/2012
+				IF ( v_numero_transaccion IS NULL) THEN  -->> Valida si ya se ingreso la comisiï¿½??ï¿½?Â³n de crï¿½??ï¿½?Â©dito, para no duplicarla 24/04/2012
 					If Mcosto = '0' Then
 						INSERT INTO bdiaclaracion:acl_movimiento
 						-- pky_movimiento                            calculado     cargo     cargo_ajuste	exitoso     fecha_afectacion        fecha_hora_e_global     fechahora               folio_csuac     folio_suc         identificador_adquiriente     iso_37     iso_41     monto     montoprocedente     duplicado     numero_transaccion     procede     referencia    referencia23    reversado     secuencia           fky_aclaracion     fky_padre        fky_producto     fky_solicitud_e_global     fky_tipo_evento     fky_tipo_movimiento     fky_tipo_catalogo_transaccion     ref_comercio   num_sucursal  , recuperaciom, monto_recuperacion
@@ -503,7 +501,7 @@ RETURNING CHAR(3);
 			END IF;
 ---		----------*******************************************************************************************************************************************
 		
--->		> Flujo de aclaraciones: Analizar, No Procede = Sin AfectaciÃ??Ã?Â³n  --> Solo cobro de comision
+-->		> Flujo de aclaraciones: Analizar, No Procede = Sin Afectaciï¿½??ï¿½?Â³n  --> Solo cobro de comision
 		
 			IF (pDictamen = 'CM') THEN
 				--SET ISOLATION TO DIRTY READ;
@@ -599,7 +597,7 @@ RETURNING CHAR(3);
 				AND duplicado = 0
 				AND folio_csuac = pFolioSuac;
 		
-				END IF;  -- comisiÃ??Ã?Â³n desde acl_tipo_evento
+				END IF;  -- comisiï¿½??ï¿½?Â³n desde acl_tipo_evento
 		
 		
 				--SET ISOLATION TO DIRTY READ;
@@ -716,7 +714,7 @@ RETURNING CHAR(3);
 				let pFolioSuacSUC = trim(v_fecha_folio)||lpad(pFolioSuac,10,0);
 		
 		
-			--ValidaciÃ??Ã?Â³n para no permitir abonos/cargos dobles del mismo folio a las cuentas 13/01/2015
+			--Validaciï¿½??ï¿½?Â³n para no permitir abonos/cargos dobles del mismo folio a las cuentas 13/01/2015
 		
 				--SET ISOLATION TO DIRTY READ;
 				SELECT count(*)
@@ -769,7 +767,7 @@ RETURNING CHAR(3);
 						-->
 						
 		
-					END IF; -- aplicaciÃ??Ã?Â³n cargo/abono
+					END IF; -- aplicaciï¿½??ï¿½?Â³n cargo/abono
 						IF (CCodret_c = "005") THEN
 							LET cCodRet='005'; -- Intento de cargo con crÃ©dito vencido "BT" y bloqueado y sin saldo suficiente
 							ROLLBACK WORK;
@@ -875,7 +873,7 @@ RETURNING CHAR(3);
 		
 		
 			END FOREACH;
-		END IF; -- Fin de validación de TADC
+		END IF; -- Fin de validaciï¿½n de TADC
 -- Actualiza tabla de acl_aclaracion con la fecha en que se dictamino
 
     COMMIT WORK;

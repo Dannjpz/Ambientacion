@@ -103,8 +103,8 @@ DEFINE  vIndFico    CHAR(1);
 --SET DEBUG FILE TO '/informix/macf/sp_graba_indicador.out';
 --TRACE ON;
 
-SET DEBUG FILE TO "/resplogifx/repaclaraciones/sp_graba_indicador_versionPrincipal.out";
-TRACE ON;
+--SET DEBUG FILE TO "/resplogifx/repaclaraciones/sp_graba_indicador_versionPrincipal.out";
+--TRACE ON;
 
     LET cCod_ret      = '000';
 	LET sql_err       = 0;

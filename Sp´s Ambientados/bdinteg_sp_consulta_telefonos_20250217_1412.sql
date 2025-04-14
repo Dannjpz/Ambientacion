@@ -1,8 +1,7 @@
-
-
-
-
-
+DROP PROCEDURE IF EXISTS "informix".sp_consulta_telefonos(  CHAR(3),
+                                                     CHAR(20),
+                                                    SMALLINT,
+                                                   CHAR(1) );
 
 
 CREATE PROCEDURE "informix".sp_consulta_telefonos( pEmpresa  CHAR(3),
@@ -72,6 +71,9 @@ RETURNING CHAR(5)  AS vcodret1,
 
     --- SET DEBUG FILE TO "/resplogifx/conciliachq/sp_consulta_telefonos.out";
     --- TRACE ON;
+
+    --SET DEBUG FILE TO "/resplogifx/repaclaraciones/ambientacion/sp_consulta_telefonos.out";
+	--TRACE ON;
 
     SET ISOLATION TO DIRTY READ;
     SET LOCK MODE TO WAIT 3;

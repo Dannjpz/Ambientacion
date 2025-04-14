@@ -1,0 +1,56 @@
+trace on
+
+let w_reg_count = 0 
+expression:
+  (select (count *)
+    from tarjeta
+    where (and (= numtarjeta, p_tarjeta), (= codproductotarjeta, p_codigoproductotarjeta)))
+evaluates to 1 ; 
+let w_reg_count = 1 
+expression:(<= w_reg_count, 0)
+evaluates to f 
+expression:
+  (select (count *)
+    from tarjeta
+    where (and (and (= numtarjeta, p_tarjeta), (= codstatustarjeta, "CAN")), (= codproductotarjeta, p_codigoproductotarjeta)))
+evaluates to 0 ; 
+let w_reg_count = 0 
+expression:(> w_reg_count, 0)
+evaluates to f 
+
+update tarjeta set
+    (codstatustarjeta) = ("CAN"),
+    (fechaultmodif) = (current year to fraction(3))
+  where (and (= numtarjeta, p_tarjeta), (= codproductotarjeta, p_codigoproductotarjeta));
+
+before actions:
+
+end before actions
+
+for each row actions: 
+
+before actions:
+
+end before actions
+
+after actions:
+
+end after actions
+
+end for each row actions
+
+after actions:
+
+end after actions
+
+insert into bitacoracancelaciontarjetas(tarjeta, codigoproductotarjeta, fecha, usuario, resultado, descripcion)
+  values (p_tarjeta, p_codigoproductotarjeta, current year to fraction(3), p_usuario, "000", "CANCELACION DE TARJETA");
+let vcodret = 000 
+let p_mensaje = PROCESO EXITOSO 
+expression:p_mensaje
+evaluates to PROCESO EXITOSO 
+expression:vcodret
+evaluates to 000 
+procedure sp_cancelacion_tarjeta returns 000 , PROCESO EXITOSO 
+
+iteration of cursory procedure sp_cancelacion_tarjeta

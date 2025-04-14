@@ -1,0 +1,2046 @@
+trace on
+
+expression:
+  (select tabid
+    from systables
+    where (= tabname, "tabla_cierre_preventivo_afectac"))
+evaluates to 932 ; 
+let v_temp_table = 932 
+expression:(not-null v_temp_table)
+evaluates to t 
+
+drop table "informix".tabla_cierre_preventivo_afectac;
+expression:
+  (select fecha_hoy
+    from bdinteg:si_fechas)
+evaluates to 04/04/2025 ; 
+let c_fecha_actual = 04/04/2025 
+expression:(|| (|| (|| (|| (|| c_nombre_archivo, "_"), (<procedure> lpad, (day c_fecha_actual), 2, "0")), (<procedure> lpad, (month c_fecha_actual), 2, "0")), (year c_fecha_actual)), c_ext_archivo)
+evaluates to ACL_CIERRE_MASIVOS_AFEC_04042025.csv 
+let v_nombre_archivo = ACL_CIERRE_MASIVOS_AFEC_04042025.csv 
+
+create table "informix".tabla_cierre_preventivo_afectac;
+let ccadena =  
+expression:(|| (|| (|| (|| (|| (|| (|| " echo "FILE /resplogifx/repaclaraciones/", v_nombre_archivo), " DELIMITER "), "'"), ","), "'"), " 6;"), "">/resplogifx/repaclaraciones/aclaracion.sql")
+evaluates to  echo "FILE /resplogifx/repaclaraciones/ACL_CIERRE_MASIVOS_AFEC_04042025.csv DELIMITER ',' 6;">/resplogifx/repaclaraciones/aclaracion.sql 
+let ccadena =  echo "FILE /resplogifx/repaclaraciones/ACL_CIERRE_MASIVOS_AFEC_04042025.csv DELIMITER ',' 6;">/resplogifx/repaclaraciones/aclaracion.sql 
+expression:ccadena
+evaluates to  echo "FILE /resplogifx/repaclaraciones/ACL_CIERRE_MASIVOS_AFEC_04042025.csv DELIMITER ',' 6;">/resplogifx/repaclaraciones/aclaracion.sql                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+system :  echo "FILE /resplogifx/repaclaraciones/ACL_CIERRE_MASIVOS_AFEC_04042025.csv DELIMITER ',' 6;">/resplogifx/repaclaraciones/aclaracion.sql                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+let ccadena =  
+expression:(|| " echo "INSERT INTO "informix".tabla_cierre_preventivo_afectac;", "">> /resplogifx/repaclaraciones/aclaracion.sql")
+evaluates to  echo "INSERT INTO "informix".tabla_cierre_preventivo_afectac;">> /resplogifx/repaclaraciones/aclaracion.sql 
+let ccadena =  echo "INSERT INTO "informix".tabla_cierre_preventivo_afectac;">> /resplogifx/repaclaraciones/aclaracion.sql 
+expression:ccadena
+evaluates to  echo "INSERT INTO "informix".tabla_cierre_preventivo_afectac;">> /resplogifx/repaclaraciones/aclaracion.sql                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+system :  echo "INSERT INTO "informix".tabla_cierre_preventivo_afectac;">> /resplogifx/repaclaraciones/aclaracion.sql                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+let ccadena =  
+let ccadena = chmod 777 /resplogifx/repaclaraciones/aclaracion.sql 
+expression:ccadena
+evaluates to chmod 777 /resplogifx/repaclaraciones/aclaracion.sql                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+system : chmod 777 /resplogifx/repaclaraciones/aclaracion.sql                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+let ccadena =  
+let ccadena = dbload -d bdiaclaracion -c /resplogifx/repaclaraciones/aclaracion.sql -l /resplogifx/repaclaraciones/aclaracion.log -n 1000 -k 
+expression:ccadena
+evaluates to dbload -d bdiaclaracion -c /resplogifx/repaclaraciones/aclaracion.sql -l /resplogifx/repaclaraciones/aclaracion.log -n 1000 -k                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+system : dbload -d bdiaclaracion -c /resplogifx/repaclaraciones/aclaracion.sql -l /resplogifx/repaclaraciones/aclaracion.log -n 1000 -k                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+let vsql =  
+expression:vsql
+evaluates to                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+system :                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+let vsql = rm  /resplogifx/repaclaraciones/aclaracion.sql 
+expression:vsql
+evaluates to rm  /resplogifx/repaclaraciones/aclaracion.sql                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+system : rm  /resplogifx/repaclaraciones/aclaracion.sql                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+let vsql =  
+expression:vsql
+evaluates to                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+system :                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+expression:(|| (|| "rm  /resplogifx/repaclaraciones/", v_nombre_archivo), "")
+evaluates to rm  /resplogifx/repaclaraciones/ACL_CIERRE_MASIVOS_AFEC_04042025.csv 
+let vsql = rm  /resplogifx/repaclaraciones/ACL_CIERRE_MASIVOS_AFEC_04042025.csv 
+expression:vsql
+evaluates to rm  /resplogifx/repaclaraciones/ACL_CIERRE_MASIVOS_AFEC_04042025.csv                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+system : rm  /resplogifx/repaclaraciones/ACL_CIERRE_MASIVOS_AFEC_04042025.csv                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+expression:
+  (select (max num_proceso)
+    from acl_cierre_masivo)
+evaluates to 49 ; 
+let v_num_proceso = 49 
+expression:(null v_num_proceso)
+evaluates to f 
+expression:(+ v_num_proceso, 1)
+evaluates to 50 
+let v_num_proceso = 50 
+start select cursor.
+with hold select folio_csuac, dictamen, bitacora, procedente, codigo_resolucion, afectacion
+  from "informix".tabla_cierre_preventivo_afectac
+select cursor iteration.
+select cursor returns 0710240007 , >Solicitud no procede la transacciï¿½n fue devuelta por el comercio el dï¿½a 14/10/2024 por la cantidad de $ 471.16 (25-OCT-2024 / USR1) , Cierre masivo aplicado el 2025-04-07 18:38:06.000 por proceso automatizado. , 0 , 5 , 1 
+expression:(= v_procede, "1")
+evaluates to f 
+expression:(= v_procede, "0")
+evaluates to t 
+let v_procedente = 0 
+expression:
+  (select pky_tipo_codigo_resolucion
+    from acl_tipo_codigo_resolucion
+    where (and (= pky_tipo_codigo_resolucion, TRIM ( BOTH ' ' FROM vcodresolucion)), (= tipo_procedente, v_procedente)))
+evaluates to 5 ; 
+let v_resolucion = 5 
+expression:(or (null v_folio_csuac), (= v_folio_csuac, ""))
+evaluates to f 
+
+execute function informix.equal[procid=-114] (   = >Solicitud no procede la transacciï¿½n fue devuelta por el comercio el dï¿½a 14/10/2024 por la cantidad de $ 471.16 (25-OCT-2024 / USR1) ,    =  )
+expression:(or (null v_dictamen), (= v_dictamen, ""))
+evaluates to f 
+
+execute function informix.equal[procid=-114] (   = Cierre masivo aplicado el 2025-04-07 18:38:06.000 por proceso automatizado. ,    =  )
+expression:(or (null v_bitacora), (= v_bitacora, ""))
+evaluates to f 
+expression:(or (null v_procedente), (= v_procedente, ""))
+evaluates to f 
+expression:(or (null v_resolucion), (= v_resolucion, ""))
+evaluates to NULL. 
+expression:(not-null v_folio_csuac)
+evaluates to t 
+
+execute function informix.sp_aplica_cierre_masivo[procid=2405] ( pfolio = 0710240007       ,  pprocede = 0  ,  presolucion = 5 ,  popcion = 1 ,  pempleado = 330646 ,  ppredictamen = >Solicitud no procede la transacciï¿½n fue devuelta por el comercio el dï¿½a 14/10/2024 por la cantidad de $ 471.16 (25-OCT-2024 / USR1) ,  pnumproceso = 50 ,  pafectacion = 1 )
+expression:
+  (select current year to fraction(3)
+    from systables
+    where (= tabid, 1))
+evaluates to 2025-04-07 20:47:32.000 ; 
+let vfechaactual = 2025-04-07 20:47:32.000 
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+expression:
+  (select pky_resolucion, descripcion
+    from acl_resolucion
+    where (= nombre, "iniciocierreMasivo"))
+evaluates to Inicia Cierre Masivo del Folio ; 115 ; 
+let vaccioniniciocierre = 115 
+let vdescripcionaccion = Inicia Cierre Masivo del Folio 
+expression:
+  (select pky_usuario
+    from acl_usuario
+    where (and (= num_empleado, pempleado), (= pky_usuario, "1")))
+evaluates to 1 ; 
+let vidususario = 1 
+expression:(= popcion, 1)
+evaluates to t 
+expression:
+  (select folio_csuac
+    from acl_aclaracion
+    where (= folio_csuac, pfolio))
+evaluates to 0710240007 ; 
+let vfoliocsuac = 0710240007 
+expression:(null vfoliocsuac)
+evaluates to f 
+expression:
+  (select fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, pky_aclaracion, fky_area, importereclamado, fechacaptura, num_cliente
+    from acl_aclaracion
+    where (= folio_csuac, vfoliocsuac))
+evaluates to 002923085 ; 10/07/2024 ; NULL. ; NULL. ; 2475405 ; 6 ; 73 ; 1 ; 
+let vestatusaclinicial = 1 
+let vestatusanainicial = 73 
+let vestatuscorpinicial = 6 
+let vidaclaracion = 2475405 
+let vareaacl = NULL. 
+let vimportereclamado = NULL. 
+let vfechacapturaacl = 10/07/2024 
+let vcliente = 002923085 
+expression:(not-null vaccioniniciocierre)
+evaluates to t 
+expression:(|| (|| TRIM ( BOTH ' ' FROM vdescripcionaccion), ": "), vfoliocsuac)
+evaluates to Inicia Cierre Masivo del Folio: 0710240007  
+let vdescripcionaccion = Inicia Cierre Masivo del Folio: 0710240007  
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescripcionaccion, current year to fraction(3), vfoliocsuac, vaccioniniciocierre, vidaclaracion, vareaacl, vestatusaclinicial, vestatusanainicial, vestatuscorpinicial, vidususario);
+expression:(>= vestatusaclinicial, 3)
+evaluates to f 
+expression:
+  (select pky_estatus_corporativo, fky_accion
+    from acl_estatus_corporativo
+    where (and (= nombre, "PREDICTAMINADA"), (= activo, 1)))
+evaluates to 9 ; 5 ; 
+let vpredictamenestatuscorp = 5 
+let vaccionpredictamen = 9 
+expression:(<procedure> replace, (<procedure> replace, ppredictamen, (<procedure> chr, 13), ""), (<procedure> chr, 10), "")
+evaluates to >Solicitud no procede la transacciï¿½n fue devuelta por el comercio el dï¿½a 14/10/2024 por la cantidad de $ 471.16 (25-OCT-2024 / USR1) 
+let ppredictamen = >Solicitud no procede la transacciï¿½n fue devuelta por el comercio el dï¿½a 14/10/2024 por la cantidad de $ 471.16 (25-OCT-2024 / USR1) 
+
+update acl_aclaracion set
+    (montoprocedente) = (vimportereclamado),
+    (predictamen) = (ppredictamen),
+    (procede) = (pprocede),
+    (fky_estatus_corp_general) = (vpredictamenestatuscorp),
+    (fky_tipo_codigo_resolucion) = (presolucion)
+  where (= folio_csuac, vfoliocsuac);
+expression:
+  (select fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general
+    from acl_aclaracion
+    where (= folio_csuac, vfoliocsuac))
+evaluates to 5 ; 73 ; 1 ; 
+let vestatusacl = 1 
+let vestatusana = 73 
+let vestatuscorp = 5 
+let vresultado = Predictaminado 
+
+insert into acl_cierre_masivo(fecha, folio, tipo_archivo, folio_csuac, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, afectacion, proceso, num_proceso)
+  values (vfechaactual, pfolio, popcion, vfoliocsuac, vestatusacl, vestatusana, vestatuscorp, vafectacion, vresultado, pnumproceso);
+expression:
+  (select pky_usuario
+    from acl_usuario
+    where (and (= num_empleado, pempleado), (= pky_usuario, "1")))
+evaluates to 1 ; 
+let vidususario = 1 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, ppredictamen, current year to fraction(3), vfoliocsuac, vaccionpredictamen, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:
+  (select pky_resolucion
+    from acl_resolucion
+    where (= nombre, "autorizarAbono"))
+evaluates to 3 ; 
+let vaccionabono = 3 
+expression:
+  (select 1
+    from acl_movimiento
+    where (and (and (and (= fky_aclaracion, vidaclaracion), (= exitoso, 1)), (= duplicado, 0)), (null fky_padre)))
+evaluates to NULL. ; 
+let vabonotemporal = NULL. 
+expression:(= pafectacion, "1")
+evaluates to t 
+expression:(= vabonotemporal, 1)
+evaluates to NULL. 
+expression:(= pprocede, 1)
+evaluates to f 
+expression:(= pprocede, 0)
+evaluates to t 
+expression:
+  (select te.costo
+    from acl_aclaracion as acl, acl_tipo_evento as te
+    where (= pky_aclaracion, vidaclaracion))
+evaluates to $0.00 ; 
+let vcostocomision = $0.00 
+expression:(> vcostocomision, 0)
+evaluates to f 
+let vafectacion = Si 
+let vindicadorafectacion = 1 
+expression:
+  (select current year to fraction(3)
+    from systables
+    where (= tabid, 1))
+evaluates to 2025-04-07 20:47:32.000 ; 
+let vfechadictamen = 2025-04-07 20:47:32.000 
+expression:
+  (select nombre1, nombre2, apell_paterno, apell_materno
+    from bdinteg:si_cliente
+    where (= numcte, vcliente))
+evaluates to NULL. ; NULL. ; NULL. ; NULL. ; 
+let vnombre1 = NULL. 
+let vnombre2 = NULL. 
+let vapellpaterno = NULL. 
+let vapellmaterno = NULL. 
+expression:(= pprocede, 1)
+evaluates to f 
+expression:(= pprocede, 1)
+evaluates to f 
+expression:(|| (|| (|| (|| (|| (|| TRIM ( BOTH ' ' FROM (nvl vnombre1, "")), " "), TRIM ( BOTH ' ' FROM (nvl vnombre2, ""))), " "), TRIM ( BOTH ' ' FROM (nvl vapellpaterno, ""))), " "), TRIM ( BOTH ' ' FROM (nvl vapellmaterno, "")))
+evaluates to     
+let vnombrecliente =     
+expression:(|| (|| TRIM ( BOTH ' ' FROM (nvl vnombre1, "")), " "), TRIM ( BOTH ' ' FROM (nvl vnombre2, "")))
+evaluates to   
+let v_nombre =   
+expression:(|| (|| TRIM ( BOTH ' ' FROM (nvl vapellpaterno, "")), " "), TRIM ( BOTH ' ' FROM (nvl vapellmaterno, "")))
+evaluates to   
+let v_apellidos =   
+
+execute function bdinteg:informix.sp_consulta_correos[procid=5617] ( pempresa = 001 ,  pnumcte = 002923085 ,  ptipocorreo = 1 ,  pconsulta = 0 )
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+expression:(or (or (or (or (null pempresa), (= pempresa, "")), (or (null pnumcte), (= pnumcte, ""))), (or (null ptipocorreo), (= ptipocorreo, 0))), (or (null pconsulta), (= pconsulta, "")))
+evaluates to f 
+expression:
+  (select (count *)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumcte))
+evaluates to 0 ; 
+let vexistecte = 0 
+expression:(= vexistecte, 0)
+evaluates to t 
+let vcodret1 = 104 
+expression:vstatuscorreo
+evaluates to   
+expression:vtipocorreo
+evaluates to 0 
+expression:vcorreoelec
+evaluates to                                                                                                      
+expression:vcodret1
+evaluates to 104   
+procedure sp_consulta_correos returns 104   ,                                                                                                      , 0 ,   
+
+expression:(<procedure> bdinteg:sp_consulta_correos, "001", vcliente, "1", "0")
+evaluates to   ; 0 ;                                                                                                      ; 104   ; 
+let vcodretdatoscte = 104   
+let vcorreoelec =                                                                                                      
+let vtipocorreo = 0 
+let vstatuscorreo =   
+
+execute function bdinteg:informix.sp_consulta_telefonos[procid=5618] ( pempresa = 001 ,  pnumcte = 002923085 ,  ptipotel = 2 ,  pconsulta = 0 )
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+expression:(or (or (or (null pempresa), (= pempresa, "")), (or (null pnumcte), (= pnumcte, ""))), (or (null ptipotel), (= ptipotel, 0)))
+evaluates to f 
+expression:
+  (select (count *)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumcte))
+evaluates to 0 ; 
+let vexistecte = 0 
+expression:(= vexistecte, 0)
+evaluates to t 
+let vcodret1 = 104 
+expression:statusvalidacion
+evaluates to 0 
+expression:vnombrecarrier
+evaluates to                                
+expression:vcarrier
+evaluates to 0 
+expression:vextension
+evaluates to       
+expression:vstatus_tel
+evaluates to   
+expression:vsecuencia
+evaluates to 0 
+expression:vtipotel
+evaluates to 0 
+expression:vtelefono
+evaluates to               
+expression:vcodret1
+evaluates to 104   
+procedure sp_consulta_telefonos returns 104   ,               , 0 , 0 ,   ,       , 0 ,                                , 0 
+
+expression:(<procedure> bdinteg:sp_consulta_telefonos, "001", vcliente, "2", "0")
+evaluates to 0 ;                      ; 0 ;       ;   ; 0 ; 0 ;               ; 104   ; 
+let vcodretdatoscte = 104   
+let vtelefono =               
+let vtipotel = 0 
+let vsecuencia = 0 
+let vstatus_tel =   
+let vextension =       
+let vcarrier = 0 
+let vnombrecarrier =                      
+let statusvalidacion = 0 
+expression:
+  (select tpro.tipo_producto, pro.numero_cuenta, tpro.producto
+    from acl_aclaracion as acl, acl_producto as pro, acl_tipo_producto as tpro
+    where (= pky_aclaracion, vidaclaracion))
+evaluates to 6001 ; 600137478282 ; 1 ; 
+let vtipoproducto = 1 
+let vcuenta = 600137478282 
+let v_producto = 6001 
+expression:(not-null vdictamen)
+evaluates to f 
+expression:(= pafectacion, "1")
+evaluates to t 
+expression:(= vindicadorafectacion, 1)
+evaluates to t 
+expression:
+  (select pky_resolucion, descripcion
+    from acl_resolucion
+    where (= nombre, caccionafectacion))
+evaluates to Se afectó el movimiento, ; 23 ; 
+let vaccionafectacion = 23 
+let vdescafectacion = Se afectó el movimiento, 
+expression:
+  (select pky_estatus_corporativo
+    from acl_estatus_corporativo
+    where (and (= nombre, "DICTAMEN_ACEPTADA"), (= activo, 1)))
+evaluates to 6 ; 
+let vdictamenestatuscorp = 6 
+expression:
+  (select pky_estatus_aclaracion
+    from acl_estatus_aclaracion
+    where (= nombre, "ACLARACION_CON_DICTAMEN_NO_DIGITALIZADO"))
+evaluates to 3 ; 
+let vdictamenestatusacl = 3 
+expression:
+  (select current year to fraction(3)
+    from systables
+    where (= tabid, 1))
+evaluates to 2025-04-07 20:47:32.000 ; 
+let vfechadictamen = 2025-04-07 20:47:32.000 
+expression:(+ (- (date vfechadictamen), vfechacapturaacl), 1)
+evaluates to 183 
+let vdiasconclusion = 183 
+
+update acl_cierre_masivo set
+    (afectacion) = (vafectacion)
+  where (and (= folio_csuac, vfoliocsuac), (= fecha, vfechaactual));
+
+update acl_aclaracion set
+    (fecha_dictamen) = (vfechadictamen),
+    (fky_estatus_aclaracion) = (vdictamenestatusacl),
+    (fky_estatus_corp_general) = (vdictamenestatuscorp),
+    (dias_conclusion) = (vdiasconclusion)
+  where (= folio_csuac, vfoliocsuac);
+
+before actions:
+
+end before actions
+
+for each row actions: 
+
+end for each row actions
+
+after actions:
+
+end after actions
+expression:
+  (select fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general
+    from acl_aclaracion
+    where (= folio_csuac, vfoliocsuac))
+evaluates to 6 ; 73 ; 3 ; 
+let vestatusacl = 3 
+let vestatusana = 73 
+let vestatuscorp = 6 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescafectacion, current year to fraction(3), vfoliocsuac, vaccionafectacion, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:
+  (select pky_resolucion, descripcion
+    from acl_resolucion
+    where (= nombre, "autorizarPredictamen"))
+evaluates to Autoriza el predictamen. ; 16 ; 
+let vacciondictamen = 16 
+let vdescdictamen = Autoriza el predictamen. 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescdictamen, current year to fraction(3), vfoliocsuac, vacciondictamen, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:
+  (select pky_resolucion, descripcion
+    from acl_resolucion
+    where (= nombre, "cierreMasivo"))
+evaluates to Proceso de Cierre Masivo por Incremento de volumen ; 116 ; 
+let vacciondictamen = 116 
+let vdescdictamen = Proceso de Cierre Masivo por Incremento de volumen 
+expression:(|| (|| TRIM ( BOTH ' ' FROM vdescdictamen), " "), pnumproceso)
+evaluates to Proceso de Cierre Masivo por Incremento de volumen 50 
+let vdescdictamen = Proceso de Cierre Masivo por Incremento de volumen 50 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescdictamen, current year to fraction(3), vfoliocsuac, vacciondictamen, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:(or (not-null vtelefono), (<> vtelefono, ""))
+evaluates to t 
+
+execute function bdimnsj:informix.sp_registra_evento[procid=2690] ( ptipomsj = 2 ,  pidmsj = ACL_SMS    ,  pidplantilla = ACL_SMS      ,  pnumclt = 002923085 ,  pnumcta =                      ,  pnumtarjeta =                  ,  ptipoproc = 2 ,  pstr1 = 10/07/2024                     ,  pstr2 = 0710240007  ,  pstr3 = NULL. ,  pstr4 =                                ,  pstr5 =                                                                                                                                                        ,  pstr6 =                                                                                                      ,  pstr7 =                                                              ,  pstr8 =                                                              ,  pstr9 =                 ,  pstr10 =                                                                                                      ,  pcorreo_alterno =                                                                                                      ,  pcelular_alterno =               ,  pimporte1 = $0.00 ,  pimporte2 = $0.00 ,  pimporte3 = $0.00 ,  pimporte4 = $0.00 ,  pimporte5 = $0.00 ,  pfecha1 = 2025-04-07 00:00:00.000 ,  pfecha2 = NULL. )
+let ccodret = 00000 
+let iexiste = 0 
+let iexiste2 = 0 
+let iexiste3 = 0 
+let iexistec = 0 
+let vsqlerr = 0 
+let vnumcte =  
+let cdia =  
+let canio =  
+let cmes =  
+let cmes1 =  
+let cfechah =  
+let vpermiteinsertar =  
+let bandera =  
+let cstr1 =  
+let cstr5 =  
+let ccodalerta =  
+let iactinac = 0 
+let iprioridad = 0 
+
+set lock mode to wait 3;
+
+set isolation to dirty read;
+expression:
+  (select valor
+    from mnsj_param
+    where (= cod_param, "5"))
+evaluates to 1                                                                                                    ; 
+let bandera = 1                                                                                                    
+expression:(= TRIM ( BOTH ' ' FROM bandera), "0")
+evaluates to f 
+expression:(or (or (or (or (null ptipomsj), (= ptipomsj, "")), (or (null pidmsj), (= pidmsj, ""))), (or (null ptipoproc), (= ptipoproc, ""))), (or (null pidplantilla), (= pidplantilla, "")))
+evaluates to f 
+expression:(or (> ptipoproc, "2"), (= ptipoproc, "0"))
+evaluates to f 
+expression:(or (> ptipomsj, "3"), (= ptipomsj, "0"))
+evaluates to f 
+expression:(and (and (or (null pnumclt), (= pnumclt, "")), (or (null pnumcta), (= pnumcta, ""))), (or (null pnumtarjeta), (= pnumtarjeta, "")))
+evaluates to f 
+expression:(or (= pidmsj, "POS_CREDE"), (= pidmsj, "ATM_CREDE"))
+evaluates to f 
+expression:(in pidmsj, "SPEI_SMREC", "SPEI_TRREC")
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_SMS"), (= pidplantilla, "NOT_MOV_TJT")), (= pstr7, "Cuenta"))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_SMS"), (= pidplantilla, "NOT_MOV_TJT")), (or (or (= pstr7, "Tarjeta"), (= pstr7, "Tarjeta de Credito")), (= pstr7, "Tarjeta de Debito")))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_EMAIL"), (= pidplantilla, "NOT_INT_MOVI")), (= pstr7, "Cuenta"))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_EMAIL"), (= pidplantilla, "NOT_INT_MOVI")), (or (or (= pstr7, "Tarjeta"), (= pstr7, "Tarjeta de Credito")), (= pstr7, "Tarjeta de Debito")))
+evaluates to f 
+expression:(<> (substring pidmsj, 1, 3), "WEB")
+evaluates to t 
+expression:(<> TRIM ( BOTH ' ' FROM pnumclt), "")
+evaluates to t 
+expression:(<> TRIM ( BOTH ' ' FROM pnumclt), "000000000")
+evaluates to t 
+expression:
+  (select (nvl (count numcte), 0)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumclt))
+evaluates to 0.0000000000000000 ; 
+let iexistec = 0.0000000000000000 
+expression:(or (= iexistec, 0), (null iexistec))
+evaluates to t 
+let ccodret = 00100 
+expression:ccodret
+evaluates to 00100 
+procedure sp_registra_evento returns 00100 
+
+expression:(<procedure> bdimnsj:sp_registra_evento, "2", ccontratosms, cplantilla, vcliente, "", "", "2", vfechacapturaacl, vfoliocsuac, vtipodictamen, "", "", "", "", "", "", "", "", vtelefono, 0, 0, 0, 0, 0, <TODAY>, "")
+evaluates to 00100 
+let vcodretnotif = 00100 
+expression:(= vcodretnotif, "00000")
+evaluates to f 
+let vdescsms = El mensaje de texto de notificaciÃ³n no pudo ser enviado al Cliente. 
+expression:
+  (select pky_resolucion
+    from acl_resolucion
+    where (= nombre, "notificacionSMSFallido"))
+evaluates to 31 ; 
+let vaccionsms = 31 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescsms, current year to fraction(3), vfoliocsuac, vaccionsms, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:(or (not-null vcorreoelec), (<> vcorreoelec, ""))
+evaluates to t 
+expression:(substring ppredictamen, 1, 100)
+evaluates to >Solicitud no procede la transacciï¿½n fue devuelta por el comercio el dï¿½a 14/10/2024 por la canti 
+let vpredictamen1 = >Solicitud no procede la transacciï¿½n fue devuelta por el comercio el dï¿½a 14/10/2024 por la canti 
+expression:(substring ppredictamen, 101, 200)
+evaluates to dad de $ 471.16 (25-OCT-2024 / USR1) 
+let vpredictamen2 = dad de $ 471.16 (25-OCT-2024 / USR1) 
+expression:(substring ppredictamen, 201, 250)
+evaluates to NULL. 
+let vpredictamen3 = NULL. 
+expression:(<procedure> to_char, (extend current year to fraction(3) hour to minute), "%H:%M")
+evaluates to 20:47 
+let vhoradictamen = 20:47 
+expression:(<procedure> to_char, current year to fraction(3), "%d/%m/%Y")
+evaluates to 07/04/2025 
+let vfechanotifacion = 07/04/2025 
+expression:(<procedure> lpad, (<procedure> right, vcuenta, 4), (<procedure> length, vcuenta), "X")
+evaluates to XXXXXXXX8282 
+let vcuentaenmascarada = XXXXXXXX8282 
+expression:(nvl vpredictamen1, "")
+evaluates to >Solicitud no procede la transacciï¿½n fue devuelta por el comercio el dï¿½a 14/10/2024 por la canti 
+let vpredictamen1 = >Solicitud no procede la transacciï¿½n fue devuelta por el comercio el dï¿½a 14/10/2024 por la canti 
+expression:(nvl vpredictamen2, "")
+evaluates to dad de $ 471.16 (25-OCT-2024 / USR1) 
+let vpredictamen2 = dad de $ 471.16 (25-OCT-2024 / USR1) 
+expression:(nvl vpredictamen3, "")
+evaluates to  
+let vpredictamen3 =  
+
+execute function bdimnsj:informix.sp_registra_evento[procid=2690] ( ptipomsj = 1 ,  pidmsj = ACL_EMAIL  ,  pidplantilla = ACL_SMS      ,  pnumclt = 002923085 ,  pnumcta =                      ,  pnumtarjeta =                  ,  ptipoproc = 2 ,  pstr1 = 10/07/2024                     ,  pstr2 = 0710240007  ,  pstr3 = NULL. ,  pstr4 = XXXXXXXX8282                   ,  pstr5 =                                                                                                                                                        ,  pstr6 = >Solicitud no procede la transacciï¿½n fue devuelta por el comercio el dï¿½a 14/10/2024 por la canti ,  pstr7 = 07/04/2025      ,  pstr8 =                                                              ,  pstr9 = 20:47      ,  pstr10 = dad de $ 471.16 (25-OCT-2024 / USR1)                                                                 ,  pcorreo_alterno =                                                                                                      ,  pcelular_alterno =            ,  pimporte1 = NULL. ,  pimporte2 = $0.00 ,  pimporte3 = $0.00 ,  pimporte4 = $0.00 ,  pimporte5 = $0.00 ,  pfecha1 = 2025-04-07 00:00:00.000 ,  pfecha2 = NULL. )
+let ccodret = 00000 
+let iexiste = 0 
+let iexiste2 = 0 
+let iexiste3 = 0 
+let iexistec = 0 
+let vsqlerr = 0 
+let vnumcte =  
+let cdia =  
+let canio =  
+let cmes =  
+let cmes1 =  
+let cfechah =  
+let vpermiteinsertar =  
+let bandera =  
+let cstr1 =  
+let cstr5 =  
+let ccodalerta =  
+let iactinac = 0 
+let iprioridad = 0 
+
+set lock mode to wait 3;
+
+set isolation to dirty read;
+expression:
+  (select valor
+    from mnsj_param
+    where (= cod_param, "5"))
+evaluates to 1                                                                                                    ; 
+let bandera = 1                                                                                                    
+expression:(= TRIM ( BOTH ' ' FROM bandera), "0")
+evaluates to f 
+expression:(or (or (or (or (null ptipomsj), (= ptipomsj, "")), (or (null pidmsj), (= pidmsj, ""))), (or (null ptipoproc), (= ptipoproc, ""))), (or (null pidplantilla), (= pidplantilla, "")))
+evaluates to f 
+expression:(or (> ptipoproc, "2"), (= ptipoproc, "0"))
+evaluates to f 
+expression:(or (> ptipomsj, "3"), (= ptipomsj, "0"))
+evaluates to f 
+expression:(and (and (or (null pnumclt), (= pnumclt, "")), (or (null pnumcta), (= pnumcta, ""))), (or (null pnumtarjeta), (= pnumtarjeta, "")))
+evaluates to f 
+expression:(or (= pidmsj, "POS_CREDE"), (= pidmsj, "ATM_CREDE"))
+evaluates to f 
+expression:(in pidmsj, "SPEI_SMREC", "SPEI_TRREC")
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_SMS"), (= pidplantilla, "NOT_MOV_TJT")), (= pstr7, "Cuenta"))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_SMS"), (= pidplantilla, "NOT_MOV_TJT")), (or (or (= pstr7, "Tarjeta"), (= pstr7, "Tarjeta de Credito")), (= pstr7, "Tarjeta de Debito")))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_EMAIL"), (= pidplantilla, "NOT_INT_MOVI")), (= pstr7, "Cuenta"))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_EMAIL"), (= pidplantilla, "NOT_INT_MOVI")), (or (or (= pstr7, "Tarjeta"), (= pstr7, "Tarjeta de Credito")), (= pstr7, "Tarjeta de Debito")))
+evaluates to f 
+expression:(<> (substring pidmsj, 1, 3), "WEB")
+evaluates to t 
+expression:(<> TRIM ( BOTH ' ' FROM pnumclt), "")
+evaluates to t 
+expression:(<> TRIM ( BOTH ' ' FROM pnumclt), "000000000")
+evaluates to t 
+expression:
+  (select (nvl (count numcte), 0)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumclt))
+evaluates to 0.0000000000000000 ; 
+let iexistec = 0.0000000000000000 
+expression:(or (= iexistec, 0), (null iexistec))
+evaluates to t 
+let ccodret = 00100 
+expression:ccodret
+evaluates to 00100 
+procedure sp_registra_evento returns 00100 
+
+expression:(<procedure> bdimnsj:sp_registra_evento, "1", ccontratocorreo, cplantilla, vcliente, "", "", "2", vfechacapturaacl, vfoliocsuac, vtipodictamen, vcuentaenmascarada, vnombrecliente, vpredictamen1, vfechanotifacion, vpredictamen3, vhoradictamen, vpredictamen2, vcorreoelec, "", vimportereclamado, 0, 0, 0, 0, <TODAY>, "")
+evaluates to 00100 
+let vcodretnotif = 00100 
+expression:(= vcodretnotif, "00000")
+evaluates to f 
+let vdesccorreo = El correo electrÃ³nico de notificaciÃ³n no pudo ser enviado al Cliente. 
+expression:
+  (select pky_resolucion
+    from acl_resolucion
+    where (= nombre, "notificacionCorreoExitoso"))
+evaluates to 30 ; 
+let vaccioncorreo = 30 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdesccorreo, current year to fraction(3), vfoliocsuac, vaccioncorreo, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+let vresultado = Proceso Exitoso 
+
+update acl_cierre_masivo set
+    (fky_estatus_aclaracion) = (vestatusacl),
+    (fky_estatus_corp_analisis) = (vestatusana),
+    (fky_estatus_corp_general) = (vestatuscorp),
+    (proceso) = (vresultado)
+  where (and (= folio_csuac, vfoliocsuac), (= fecha, vfechaactual));
+expression:vresultado
+evaluates to Proceso Exitoso                                    
+expression:vfoliocsuac
+evaluates to 0710240007  
+expression:ccodret
+evaluates to 000    
+procedure sp_aplica_cierre_masivo returns 000    , 0710240007  , Proceso Exitoso                                    
+
+expression:(<procedure> "informix".sp_aplica_cierre_masivo, v_folio_csuac, v_procedente, vcodresolucion, 1, "330646", v_dictamen, v_num_proceso, v_afectacion)
+evaluates to Proceso Exitoso                                    ; 0710240007  ; 000    ; 
+let v_cod_ret = 000    
+let vfoliocsuac = 0710240007  
+let vresultado = Proceso Exitoso                                    
+expression:
+  (select pky_aclaracion, fky_estatus_aclaracion, fky_estatus_corp_general
+    from "informix".acl_aclaracion
+    where (= folio_csuac, v_folio_csuac))
+evaluates to 6 ; 3 ; 2475405 ; 
+let v_pky_aclaracion = 2475405 
+let v_estatus_aclaracion = 3 
+let v_estatus_general = 6 
+expression:(not-null v_pky_aclaracion)
+evaluates to t 
+
+insert into "informix".acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, v_bitacora, current year to fraction(3), v_folio_csuac, 26, v_pky_aclaracion,  <NULL> , v_estatus_aclaracion,  <NULL> , v_estatus_general, 1);
+expression:(not-null v_cod_ret)
+evaluates to t 
+
+commit work;
+exception : looking for handler
+SQL error = -255 ISAM error = 0  error string =  = ""
+exception : handler FOUND
+select cursor iteration.
+select cursor returns 3012241210 , {* Hemos atendido tu aclaraciï¿½n y abonado el importe reclamado a tu cuenta. Valoramos tu elecciï¿½n como cliente en BanCoppel y esperamos seguir siendo tu elecciï¿½n para futuras compras. ï¿½Siempre estaremos aquï¿½ para ayudarte! , Cierre masivo aplicado el 2025-04-07 18:38:06.000 por proceso automatizado. , 1 , 6 , 1 
+expression:(= v_procede, "1")
+evaluates to t 
+let v_procedente = 1 
+expression:
+  (select pky_tipo_codigo_resolucion
+    from acl_tipo_codigo_resolucion
+    where (and (= pky_tipo_codigo_resolucion, TRIM ( BOTH ' ' FROM vcodresolucion)), (= tipo_procedente, v_procedente)))
+evaluates to 6 ; 
+let v_resolucion = 6 
+expression:(or (null v_folio_csuac), (= v_folio_csuac, ""))
+evaluates to f 
+
+execute function informix.equal[procid=-114] (   = {* Hemos atendido tu aclaraciï¿½n y abonado el importe reclamado a tu cuenta. Valoramos tu elecciï¿½n como cliente en BanCoppel y esperamos seguir siendo tu elecciï¿½n para futuras compras. ï¿½Siempre estaremos aquï¿½ para ayudarte! ,    =  )
+expression:(or (null v_dictamen), (= v_dictamen, ""))
+evaluates to f 
+
+execute function informix.equal[procid=-114] (   = Cierre masivo aplicado el 2025-04-07 18:38:06.000 por proceso automatizado. ,    =  )
+expression:(or (null v_bitacora), (= v_bitacora, ""))
+evaluates to f 
+expression:(or (null v_procedente), (= v_procedente, ""))
+evaluates to f 
+expression:(or (null v_resolucion), (= v_resolucion, ""))
+evaluates to NULL. 
+expression:(not-null v_folio_csuac)
+evaluates to t 
+
+execute function informix.sp_aplica_cierre_masivo[procid=2405] ( pfolio = 3012241210       ,  pprocede = 1  ,  presolucion = 6 ,  popcion = 1 ,  pempleado = 330646 ,  ppredictamen = {* Hemos atendido tu aclaraciï¿½n y abonado el importe reclamado a tu cuenta. Valoramos tu elecciï¿½n como cliente en BanCoppel y esperamos seguir siendo tu elecciï¿½n para futuras compras. ï¿½Siempre estaremos aquï¿½ para ayudarte! ,  pnumproceso = 50 ,  pafectacion = 1 )
+expression:
+  (select current year to fraction(3)
+    from systables
+    where (= tabid, 1))
+evaluates to 2025-04-07 20:47:32.000 ; 
+let vfechaactual = 2025-04-07 20:47:32.000 
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+expression:
+  (select pky_resolucion, descripcion
+    from acl_resolucion
+    where (= nombre, "iniciocierreMasivo"))
+evaluates to Inicia Cierre Masivo del Folio ; 115 ; 
+let vaccioniniciocierre = 115 
+let vdescripcionaccion = Inicia Cierre Masivo del Folio 
+expression:
+  (select pky_usuario
+    from acl_usuario
+    where (and (= num_empleado, pempleado), (= pky_usuario, "1")))
+evaluates to 1 ; 
+let vidususario = 1 
+expression:(= popcion, 1)
+evaluates to t 
+expression:
+  (select folio_csuac
+    from acl_aclaracion
+    where (= folio_csuac, pfolio))
+evaluates to 3012241210 ; 
+let vfoliocsuac = 3012241210 
+expression:(null vfoliocsuac)
+evaluates to f 
+expression:
+  (select fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, pky_aclaracion, fky_area, importereclamado, fechacaptura, num_cliente
+    from acl_aclaracion
+    where (= folio_csuac, vfoliocsuac))
+evaluates to 027704404 ; 03/06/2025 ; NULL. ; NULL. ; 2475468 ; NULL. ; NULL. ; 1 ; 
+let vestatusaclinicial = 1 
+let vestatusanainicial = NULL. 
+let vestatuscorpinicial = NULL. 
+let vidaclaracion = 2475468 
+let vareaacl = NULL. 
+let vimportereclamado = NULL. 
+let vfechacapturaacl = 03/06/2025 
+let vcliente = 027704404 
+expression:(not-null vaccioniniciocierre)
+evaluates to t 
+expression:(|| (|| TRIM ( BOTH ' ' FROM vdescripcionaccion), ": "), vfoliocsuac)
+evaluates to Inicia Cierre Masivo del Folio: 3012241210  
+let vdescripcionaccion = Inicia Cierre Masivo del Folio: 3012241210  
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescripcionaccion, current year to fraction(3), vfoliocsuac, vaccioniniciocierre, vidaclaracion, vareaacl, vestatusaclinicial, vestatusanainicial, vestatuscorpinicial, vidususario);
+expression:(>= vestatusaclinicial, 3)
+evaluates to f 
+expression:
+  (select pky_estatus_corporativo, fky_accion
+    from acl_estatus_corporativo
+    where (and (= nombre, "PREDICTAMINADA"), (= activo, 1)))
+evaluates to 9 ; 5 ; 
+let vpredictamenestatuscorp = 5 
+let vaccionpredictamen = 9 
+expression:(<procedure> replace, (<procedure> replace, ppredictamen, (<procedure> chr, 13), ""), (<procedure> chr, 10), "")
+evaluates to {* Hemos atendido tu aclaraciï¿½n y abonado el importe reclamado a tu cuenta. Valoramos tu elecciï¿½n como cliente en BanCoppel y esperamos seguir siendo tu elecciï¿½n para futuras compras. ï¿½Siempre estaremos aquï¿½ para ayudarte! 
+let ppredictamen = {* Hemos atendido tu aclaraciï¿½n y abonado el importe reclamado a tu cuenta. Valoramos tu elecciï¿½n como cliente en BanCoppel y esperamos seguir siendo tu elecciï¿½n para futuras compras. ï¿½Siempre estaremos aquï¿½ para ayudarte! 
+
+update acl_aclaracion set
+    (montoprocedente) = (vimportereclamado),
+    (predictamen) = (ppredictamen),
+    (procede) = (pprocede),
+    (fky_estatus_corp_general) = (vpredictamenestatuscorp),
+    (fky_tipo_codigo_resolucion) = (presolucion)
+  where (= folio_csuac, vfoliocsuac);
+expression:
+  (select fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general
+    from acl_aclaracion
+    where (= folio_csuac, vfoliocsuac))
+evaluates to 5 ; NULL. ; 1 ; 
+let vestatusacl = 1 
+let vestatusana = NULL. 
+let vestatuscorp = 5 
+let vresultado = Predictaminado 
+
+insert into acl_cierre_masivo(fecha, folio, tipo_archivo, folio_csuac, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, afectacion, proceso, num_proceso)
+  values (vfechaactual, pfolio, popcion, vfoliocsuac, vestatusacl, vestatusana, vestatuscorp, vafectacion, vresultado, pnumproceso);
+expression:
+  (select pky_usuario
+    from acl_usuario
+    where (and (= num_empleado, pempleado), (= pky_usuario, "1")))
+evaluates to 1 ; 
+let vidususario = 1 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, ppredictamen, current year to fraction(3), vfoliocsuac, vaccionpredictamen, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:
+  (select pky_resolucion
+    from acl_resolucion
+    where (= nombre, "autorizarAbono"))
+evaluates to 3 ; 
+let vaccionabono = 3 
+expression:
+  (select 1
+    from acl_movimiento
+    where (and (and (and (= fky_aclaracion, vidaclaracion), (= exitoso, 1)), (= duplicado, 0)), (null fky_padre)))
+evaluates to NULL. ; 
+let vabonotemporal = NULL. 
+expression:(= pafectacion, "1")
+evaluates to t 
+expression:(= vabonotemporal, 1)
+evaluates to NULL. 
+expression:(= pprocede, 1)
+evaluates to t 
+let vdictamen = PR 
+expression:
+  (select nombre1, nombre2, apell_paterno, apell_materno
+    from bdinteg:si_cliente
+    where (= numcte, vcliente))
+evaluates to NULL. ; NULL. ; NULL. ; NULL. ; 
+let vnombre1 = NULL. 
+let vnombre2 = NULL. 
+let vapellpaterno = NULL. 
+let vapellmaterno = NULL. 
+expression:(= pprocede, 1)
+evaluates to t 
+let vtipodictamen = Procedente 
+expression:(|| (|| (|| (|| (|| (|| TRIM ( BOTH ' ' FROM (nvl vnombre1, "")), " "), TRIM ( BOTH ' ' FROM (nvl vnombre2, ""))), " "), TRIM ( BOTH ' ' FROM (nvl vapellpaterno, ""))), " "), TRIM ( BOTH ' ' FROM (nvl vapellmaterno, "")))
+evaluates to     
+let vnombrecliente =     
+expression:(|| (|| TRIM ( BOTH ' ' FROM (nvl vnombre1, "")), " "), TRIM ( BOTH ' ' FROM (nvl vnombre2, "")))
+evaluates to   
+let v_nombre =   
+expression:(|| (|| TRIM ( BOTH ' ' FROM (nvl vapellpaterno, "")), " "), TRIM ( BOTH ' ' FROM (nvl vapellmaterno, "")))
+evaluates to   
+let v_apellidos =   
+
+execute function bdinteg:informix.sp_consulta_correos[procid=5617] ( pempresa = 001 ,  pnumcte = 027704404 ,  ptipocorreo = 1 ,  pconsulta = 0 )
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+expression:(or (or (or (or (null pempresa), (= pempresa, "")), (or (null pnumcte), (= pnumcte, ""))), (or (null ptipocorreo), (= ptipocorreo, 0))), (or (null pconsulta), (= pconsulta, "")))
+evaluates to f 
+expression:
+  (select (count *)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumcte))
+evaluates to 0 ; 
+let vexistecte = 0 
+expression:(= vexistecte, 0)
+evaluates to t 
+let vcodret1 = 104 
+expression:vstatuscorreo
+evaluates to   
+expression:vtipocorreo
+evaluates to 0 
+expression:vcorreoelec
+evaluates to                                                                                                      
+expression:vcodret1
+evaluates to 104   
+procedure sp_consulta_correos returns 104   ,                                                                                                      , 0 ,   
+
+expression:(<procedure> bdinteg:sp_consulta_correos, "001", vcliente, "1", "0")
+evaluates to   ; 0 ;                                                                                                      ; 104   ; 
+let vcodretdatoscte = 104   
+let vcorreoelec =                                                                                                      
+let vtipocorreo = 0 
+let vstatuscorreo =   
+
+execute function bdinteg:informix.sp_consulta_telefonos[procid=5618] ( pempresa = 001 ,  pnumcte = 027704404 ,  ptipotel = 2 ,  pconsulta = 0 )
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+expression:(or (or (or (null pempresa), (= pempresa, "")), (or (null pnumcte), (= pnumcte, ""))), (or (null ptipotel), (= ptipotel, 0)))
+evaluates to f 
+expression:
+  (select (count *)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumcte))
+evaluates to 0 ; 
+let vexistecte = 0 
+expression:(= vexistecte, 0)
+evaluates to t 
+let vcodret1 = 104 
+expression:statusvalidacion
+evaluates to 0 
+expression:vnombrecarrier
+evaluates to                                
+expression:vcarrier
+evaluates to 0 
+expression:vextension
+evaluates to       
+expression:vstatus_tel
+evaluates to   
+expression:vsecuencia
+evaluates to 0 
+expression:vtipotel
+evaluates to 0 
+expression:vtelefono
+evaluates to               
+expression:vcodret1
+evaluates to 104   
+procedure sp_consulta_telefonos returns 104   ,               , 0 , 0 ,   ,       , 0 ,                                , 0 
+
+expression:(<procedure> bdinteg:sp_consulta_telefonos, "001", vcliente, "2", "0")
+evaluates to 0 ;                      ; 0 ;       ;   ; 0 ; 0 ;               ; 104   ; 
+let vcodretdatoscte = 104   
+let vtelefono =               
+let vtipotel = 0 
+let vsecuencia = 0 
+let vstatus_tel =   
+let vextension =       
+let vcarrier = 0 
+let vnombrecarrier =                      
+let statusvalidacion = 0 
+expression:
+  (select tpro.tipo_producto, pro.numero_cuenta, tpro.producto
+    from acl_aclaracion as acl, acl_producto as pro, acl_tipo_producto as tpro
+    where (= pky_aclaracion, vidaclaracion))
+evaluates to 6001 ; 600117980091 ; 1 ; 
+let vtipoproducto = 1 
+let vcuenta = 600117980091 
+let v_producto = 6001 
+expression:(not-null vdictamen)
+evaluates to t 
+expression:(= vtipoproducto, "1")
+evaluates to t 
+
+execute function bdicred:informix.sp_aplicaaclaracredito[procid=6246] ( pempresa = 001 ,  pfoliosuac = 3012241210  ,  pdictamen = PR ,  pcalculainteres = 1 ,  pempleadoaut = 330646   )
+let ccodret = 000 
+expression:(date 1)
+evaluates to 01/01/1900 
+let pfechamov = 01/01/1900 
+expression:(date 1)
+evaluates to 01/01/1900 
+let pfechaacl = 01/01/1900 
+expression:(date 1)
+evaluates to 01/01/1900 
+let pfechaaux = 01/01/1900 
+expression:(date 1)
+evaluates to 01/01/1900 
+let pfecha = 01/01/1900 
+let cnumcredito =  
+let cnumtarjeta =  
+let cmontoacla = 0 
+let csucursal =  
+let pintvig = 0 
+let pintvenc = 0 
+let diasperi = 0 
+let pintboni = 0 
+let pintcap = 0 
+let pivacap = 0 
+let ccodret_c =  
+let cmensaje =  
+let csecuencia = 0 
+let ctrannopro =  
+let ctransinauto =  
+let ctranpro =  
+let ctranauto =  
+let ccargo = 0 
+let ptranaplica = 0000 
+let ctrans_no_procede =  
+let mcosto = 0 
+let ifky_aclaracion = 0 
+let ifky_producto = 0 
+let ipky_tipo_movimiento = 0 
+let wbegin = N 
+let ipky_movimiento = 0 
+let v_contador = 0 
+let pfoliosuacsuc =  
+let v_fecha_folio =  
+let csecuencia_acl_mov = 0 
+expression:(date 1)
+evaluates to 01/01/1900 
+let fecha_captura = 01/01/1900 
+let v_numero_transaccion =  
+let es_nacional =  
+let v_nombre_origen =  
+let v_origenevento =  
+let v_numtarjeta =  
+let v_foliosuc =  
+let v_fky_padre = 0 
+let v_monto = 0 
+let v_montoprocedente = 0 
+let v_fky_tipo_evento = 0 
+let v_duplicado = 0 
+let v_contador_1 = 0 
+let v_contador_2 = 0 
+let v_contador_total = 0 
+let v_tipo_fky_padre = 0 
+let max_control_afect_cred = 0 
+let v_nombre_sp =  
+let horaactual = NULL. 
+let v_tipo_producto = NULL. 
+let v_descripcion_pro =  
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+
+begin work;
+expression:
+  (select tp.producto, tp.descripcion
+    from bdiaclaracion:acl_aclaracion as acl, bdiaclaracion:acl_producto as p, bdiaclaracion:acl_tipo_producto as tp
+    where (= acl.folio_csuac, pfoliosuac))
+evaluates to TARJETA CREDITO BANCOPPEL VISA ; 6001 ; 
+let v_tipo_producto = 6001 
+let v_descripcion_pro = TARJETA CREDITO BANCOPPEL VISA 
+expression:(or (null pfoliosuac), (= pfoliosuac, ""))
+evaluates to f 
+expression:(or (null pdictamen), (= pdictamen, ""))
+evaluates to f 
+expression:(or (null pcalculainteres), (= pcalculainteres, ""))
+evaluates to f 
+expression:
+  (select valor
+    from sd_param
+    where (and (= empresa, pempresa), (= cod_param, "24")))
+evaluates to 360                                                                                                  ; 
+let diascalc = 360                                                                                                  
+expression:
+  (select fecha_hoy
+    from bdicred:sd_fechas
+    where (= empresa, pempresa))
+evaluates to 04/04/2025 ; 
+let pfecha = 04/04/2025 
+expression:(<> v_tipo_producto, "6500")
+evaluates to t 
+expression:(= pdictamen, "NP")
+evaluates to f 
+expression:(= pdictamen, "CM")
+evaluates to f 
+expression:(= pdictamen, "NP")
+evaluates to f 
+let v_contador = 0 
+expression:
+  (select fechacaptura
+    from bdiaclaracion:acl_aclaracion
+    where (= folio_csuac, pfoliosuac))
+evaluates to 03/06/2025 ; 
+let fecha_captura = 03/06/2025 
+start select cursor.
+with hold select pky_movimiento, numero_cuenta, numero_tarjeta, montoprocedente, trans_no_procede, trans_procede, trans_procede_automatico, trans_procede_sin_autorizacion, (nvl cargo, 0)
+  from bdiaclaracion:acl_movimiento as a, outer(bdiaclaracion:acl_producto as b), outer(bdiaclaracion:acl_tipo_movimiento as c)
+  where (and (and (and (= folio_csuac, pfoliosuac), (or (null procede), (= procede, 1))), (or (null exitoso), (<> exitoso, "1"))), (= (nvl fky_padre, 0), case  when (in pdictamen, "AA", "AS") then 0 else (nvl fky_padre, 0) end))
+select cursor iteration.
+end cursor
+
+commit work;
+expression:(= wbegin, "S")
+evaluates to f 
+expression:ccodret
+evaluates to 000 
+procedure sp_aplicaaclaracredito returns 000 
+
+expression:(<procedure> bdicred:sp_aplicaaclaracredito, "001", vfoliocsuac, vdictamen, 1, pempleado)
+evaluates to 000 
+let vcodretafectacion = 000 
+expression:
+  (select current year to fraction(3)
+    from systables
+    where (= tabid, 1))
+evaluates to 2025-04-07 20:47:32.000 ; 
+let vfechadictamen = 2025-04-07 20:47:32.000 
+expression:(= vcodretafectacion, "000")
+evaluates to t 
+let vafectacion = Si 
+let vindicadorafectacion = 1 
+expression:(= pafectacion, "1")
+evaluates to t 
+expression:(= vindicadorafectacion, 1)
+evaluates to t 
+expression:
+  (select pky_resolucion, descripcion
+    from acl_resolucion
+    where (= nombre, caccionafectacion))
+evaluates to Se afectó el movimiento, ; 23 ; 
+let vaccionafectacion = 23 
+let vdescafectacion = Se afectó el movimiento, 
+expression:
+  (select pky_estatus_corporativo
+    from acl_estatus_corporativo
+    where (and (= nombre, "DICTAMEN_ACEPTADA"), (= activo, 1)))
+evaluates to 6 ; 
+let vdictamenestatuscorp = 6 
+expression:
+  (select pky_estatus_aclaracion
+    from acl_estatus_aclaracion
+    where (= nombre, "ACLARACION_CON_DICTAMEN_NO_DIGITALIZADO"))
+evaluates to 3 ; 
+let vdictamenestatusacl = 3 
+expression:
+  (select current year to fraction(3)
+    from systables
+    where (= tabid, 1))
+evaluates to 2025-04-07 20:47:32.000 ; 
+let vfechadictamen = 2025-04-07 20:47:32.000 
+expression:(+ (- (date vfechadictamen), vfechacapturaacl), 1)
+evaluates to 33 
+let vdiasconclusion = 33 
+
+update acl_cierre_masivo set
+    (afectacion) = (vafectacion)
+  where (and (= folio_csuac, vfoliocsuac), (= fecha, vfechaactual));
+
+update acl_aclaracion set
+    (fecha_dictamen) = (vfechadictamen),
+    (fky_estatus_aclaracion) = (vdictamenestatusacl),
+    (fky_estatus_corp_general) = (vdictamenestatuscorp),
+    (dias_conclusion) = (vdiasconclusion)
+  where (= folio_csuac, vfoliocsuac);
+
+before actions:
+
+end before actions
+
+for each row actions: 
+
+end for each row actions
+
+after actions:
+
+end after actions
+expression:
+  (select fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general
+    from acl_aclaracion
+    where (= folio_csuac, vfoliocsuac))
+evaluates to 6 ; NULL. ; 3 ; 
+let vestatusacl = 3 
+let vestatusana = NULL. 
+let vestatuscorp = 6 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescafectacion, current year to fraction(3), vfoliocsuac, vaccionafectacion, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:
+  (select pky_resolucion, descripcion
+    from acl_resolucion
+    where (= nombre, "autorizarPredictamen"))
+evaluates to Autoriza el predictamen. ; 16 ; 
+let vacciondictamen = 16 
+let vdescdictamen = Autoriza el predictamen. 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescdictamen, current year to fraction(3), vfoliocsuac, vacciondictamen, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:
+  (select pky_resolucion, descripcion
+    from acl_resolucion
+    where (= nombre, "cierreMasivo"))
+evaluates to Proceso de Cierre Masivo por Incremento de volumen ; 116 ; 
+let vacciondictamen = 116 
+let vdescdictamen = Proceso de Cierre Masivo por Incremento de volumen 
+expression:(|| (|| TRIM ( BOTH ' ' FROM vdescdictamen), " "), pnumproceso)
+evaluates to Proceso de Cierre Masivo por Incremento de volumen 50 
+let vdescdictamen = Proceso de Cierre Masivo por Incremento de volumen 50 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescdictamen, current year to fraction(3), vfoliocsuac, vacciondictamen, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:(or (not-null vtelefono), (<> vtelefono, ""))
+evaluates to t 
+
+execute function bdimnsj:informix.sp_registra_evento[procid=2690] ( ptipomsj = 2 ,  pidmsj = ACL_SMS    ,  pidplantilla = ACL_SMS      ,  pnumclt = 027704404 ,  pnumcta =                      ,  pnumtarjeta =                  ,  ptipoproc = 2 ,  pstr1 = 03/06/2025                     ,  pstr2 = 3012241210  ,  pstr3 = Procedente                     ,  pstr4 =                                ,  pstr5 =                                                                                                                                                        ,  pstr6 =                                                                                                      ,  pstr7 =                                                              ,  pstr8 =                                                              ,  pstr9 =                 ,  pstr10 =                                                                                                      ,  pcorreo_alterno =                                                                                                      ,  pcelular_alterno =               ,  pimporte1 = $0.00 ,  pimporte2 = $0.00 ,  pimporte3 = $0.00 ,  pimporte4 = $0.00 ,  pimporte5 = $0.00 ,  pfecha1 = 2025-04-07 00:00:00.000 ,  pfecha2 = NULL. )
+let ccodret = 00000 
+let iexiste = 0 
+let iexiste2 = 0 
+let iexiste3 = 0 
+let iexistec = 0 
+let vsqlerr = 0 
+let vnumcte =  
+let cdia =  
+let canio =  
+let cmes =  
+let cmes1 =  
+let cfechah =  
+let vpermiteinsertar =  
+let bandera =  
+let cstr1 =  
+let cstr5 =  
+let ccodalerta =  
+let iactinac = 0 
+let iprioridad = 0 
+
+set lock mode to wait 3;
+
+set isolation to dirty read;
+expression:
+  (select valor
+    from mnsj_param
+    where (= cod_param, "5"))
+evaluates to 1                                                                                                    ; 
+let bandera = 1                                                                                                    
+expression:(= TRIM ( BOTH ' ' FROM bandera), "0")
+evaluates to f 
+expression:(or (or (or (or (null ptipomsj), (= ptipomsj, "")), (or (null pidmsj), (= pidmsj, ""))), (or (null ptipoproc), (= ptipoproc, ""))), (or (null pidplantilla), (= pidplantilla, "")))
+evaluates to f 
+expression:(or (> ptipoproc, "2"), (= ptipoproc, "0"))
+evaluates to f 
+expression:(or (> ptipomsj, "3"), (= ptipomsj, "0"))
+evaluates to f 
+expression:(and (and (or (null pnumclt), (= pnumclt, "")), (or (null pnumcta), (= pnumcta, ""))), (or (null pnumtarjeta), (= pnumtarjeta, "")))
+evaluates to f 
+expression:(or (= pidmsj, "POS_CREDE"), (= pidmsj, "ATM_CREDE"))
+evaluates to f 
+expression:(in pidmsj, "SPEI_SMREC", "SPEI_TRREC")
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_SMS"), (= pidplantilla, "NOT_MOV_TJT")), (= pstr7, "Cuenta"))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_SMS"), (= pidplantilla, "NOT_MOV_TJT")), (or (or (= pstr7, "Tarjeta"), (= pstr7, "Tarjeta de Credito")), (= pstr7, "Tarjeta de Debito")))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_EMAIL"), (= pidplantilla, "NOT_INT_MOVI")), (= pstr7, "Cuenta"))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_EMAIL"), (= pidplantilla, "NOT_INT_MOVI")), (or (or (= pstr7, "Tarjeta"), (= pstr7, "Tarjeta de Credito")), (= pstr7, "Tarjeta de Debito")))
+evaluates to f 
+expression:(<> (substring pidmsj, 1, 3), "WEB")
+evaluates to t 
+expression:(<> TRIM ( BOTH ' ' FROM pnumclt), "")
+evaluates to t 
+expression:(<> TRIM ( BOTH ' ' FROM pnumclt), "000000000")
+evaluates to t 
+expression:
+  (select (nvl (count numcte), 0)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumclt))
+evaluates to 0.0000000000000000 ; 
+let iexistec = 0.0000000000000000 
+expression:(or (= iexistec, 0), (null iexistec))
+evaluates to t 
+let ccodret = 00100 
+expression:ccodret
+evaluates to 00100 
+procedure sp_registra_evento returns 00100 
+
+expression:(<procedure> bdimnsj:sp_registra_evento, "2", ccontratosms, cplantilla, vcliente, "", "", "2", vfechacapturaacl, vfoliocsuac, vtipodictamen, "", "", "", "", "", "", "", "", vtelefono, 0, 0, 0, 0, 0, <TODAY>, "")
+evaluates to 00100 
+let vcodretnotif = 00100 
+expression:(= vcodretnotif, "00000")
+evaluates to f 
+let vdescsms = El mensaje de texto de notificaciÃ³n no pudo ser enviado al Cliente. 
+expression:
+  (select pky_resolucion
+    from acl_resolucion
+    where (= nombre, "notificacionSMSFallido"))
+evaluates to 31 ; 
+let vaccionsms = 31 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescsms, current year to fraction(3), vfoliocsuac, vaccionsms, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:(or (not-null vcorreoelec), (<> vcorreoelec, ""))
+evaluates to t 
+expression:(substring ppredictamen, 1, 100)
+evaluates to {* Hemos atendido tu aclaraciï¿½n y abonado el importe reclamado a tu cuenta. Valoramos tu elecciï¿½ 
+let vpredictamen1 = {* Hemos atendido tu aclaraciï¿½n y abonado el importe reclamado a tu cuenta. Valoramos tu elecciï¿½ 
+expression:(substring ppredictamen, 101, 200)
+evaluates to n como cliente en BanCoppel y esperamos seguir siendo tu elecciï¿½n para futuras compras. ï¿½Siempre estaremos aquï¿½ para ayudarte! 
+let vpredictamen2 = n como cliente en BanCoppel y esperamos seguir siendo tu elecciï¿½n para futuras compras. ï¿½Siempre estaremos aquï¿½ para ayudarte! 
+expression:(substring ppredictamen, 201, 250)
+evaluates to  estaremos aquï¿½ para ayudarte! 
+let vpredictamen3 =  estaremos aquï¿½ para ayudarte! 
+expression:(<procedure> to_char, (extend current year to fraction(3) hour to minute), "%H:%M")
+evaluates to 20:47 
+let vhoradictamen = 20:47 
+expression:(<procedure> to_char, current year to fraction(3), "%d/%m/%Y")
+evaluates to 07/04/2025 
+let vfechanotifacion = 07/04/2025 
+expression:(<procedure> lpad, (<procedure> right, vcuenta, 4), (<procedure> length, vcuenta), "X")
+evaluates to XXXXXXXX0091 
+let vcuentaenmascarada = XXXXXXXX0091 
+expression:(nvl vpredictamen1, "")
+evaluates to {* Hemos atendido tu aclaraciï¿½n y abonado el importe reclamado a tu cuenta. Valoramos tu elecciï¿½ 
+let vpredictamen1 = {* Hemos atendido tu aclaraciï¿½n y abonado el importe reclamado a tu cuenta. Valoramos tu elecciï¿½ 
+expression:(nvl vpredictamen2, "")
+evaluates to n como cliente en BanCoppel y esperamos seguir siendo tu elecciï¿½n para futuras compras. ï¿½Siempre 
+let vpredictamen2 = n como cliente en BanCoppel y esperamos seguir siendo tu elecciï¿½n para futuras compras. ï¿½Siempre 
+expression:(nvl vpredictamen3, "")
+evaluates to  estaremos aquï¿½ para ayudarte! 
+let vpredictamen3 =  estaremos aquï¿½ para ayudarte! 
+
+execute function bdimnsj:informix.sp_registra_evento[procid=2690] ( ptipomsj = 1 ,  pidmsj = ACL_EMAIL  ,  pidplantilla = ACL_SMS      ,  pnumclt = 027704404 ,  pnumcta =                      ,  pnumtarjeta =                  ,  ptipoproc = 2 ,  pstr1 = 03/06/2025                     ,  pstr2 = 3012241210  ,  pstr3 = Procedente                     ,  pstr4 = XXXXXXXX0091                   ,  pstr5 =                                                                                                                                                        ,  pstr6 = {* Hemos atendido tu aclaraciï¿½n y abonado el importe reclamado a tu cuenta. Valoramos tu elecciï¿½ ,  pstr7 = 07/04/2025      ,  pstr8 =  estaremos aquï¿½ para ayudarte!                             ,  pstr9 = 20:47      ,  pstr10 = n como cliente en BanCoppel y esperamos seguir siendo tu elecciï¿½n para futuras compras. ï¿½Siempre ,  pcorreo_alterno =                                                                                                      ,  pcelular_alterno =            ,  pimporte1 = NULL. ,  pimporte2 = $0.00 ,  pimporte3 = $0.00 ,  pimporte4 = $0.00 ,  pimporte5 = $0.00 ,  pfecha1 = 2025-04-07 00:00:00.000 ,  pfecha2 = NULL. )
+let ccodret = 00000 
+let iexiste = 0 
+let iexiste2 = 0 
+let iexiste3 = 0 
+let iexistec = 0 
+let vsqlerr = 0 
+let vnumcte =  
+let cdia =  
+let canio =  
+let cmes =  
+let cmes1 =  
+let cfechah =  
+let vpermiteinsertar =  
+let bandera =  
+let cstr1 =  
+let cstr5 =  
+let ccodalerta =  
+let iactinac = 0 
+let iprioridad = 0 
+
+set lock mode to wait 3;
+
+set isolation to dirty read;
+expression:
+  (select valor
+    from mnsj_param
+    where (= cod_param, "5"))
+evaluates to 1                                                                                                    ; 
+let bandera = 1                                                                                                    
+expression:(= TRIM ( BOTH ' ' FROM bandera), "0")
+evaluates to f 
+expression:(or (or (or (or (null ptipomsj), (= ptipomsj, "")), (or (null pidmsj), (= pidmsj, ""))), (or (null ptipoproc), (= ptipoproc, ""))), (or (null pidplantilla), (= pidplantilla, "")))
+evaluates to f 
+expression:(or (> ptipoproc, "2"), (= ptipoproc, "0"))
+evaluates to f 
+expression:(or (> ptipomsj, "3"), (= ptipomsj, "0"))
+evaluates to f 
+expression:(and (and (or (null pnumclt), (= pnumclt, "")), (or (null pnumcta), (= pnumcta, ""))), (or (null pnumtarjeta), (= pnumtarjeta, "")))
+evaluates to f 
+expression:(or (= pidmsj, "POS_CREDE"), (= pidmsj, "ATM_CREDE"))
+evaluates to f 
+expression:(in pidmsj, "SPEI_SMREC", "SPEI_TRREC")
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_SMS"), (= pidplantilla, "NOT_MOV_TJT")), (= pstr7, "Cuenta"))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_SMS"), (= pidplantilla, "NOT_MOV_TJT")), (or (or (= pstr7, "Tarjeta"), (= pstr7, "Tarjeta de Credito")), (= pstr7, "Tarjeta de Debito")))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_EMAIL"), (= pidplantilla, "NOT_INT_MOVI")), (= pstr7, "Cuenta"))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_EMAIL"), (= pidplantilla, "NOT_INT_MOVI")), (or (or (= pstr7, "Tarjeta"), (= pstr7, "Tarjeta de Credito")), (= pstr7, "Tarjeta de Debito")))
+evaluates to f 
+expression:(<> (substring pidmsj, 1, 3), "WEB")
+evaluates to t 
+expression:(<> TRIM ( BOTH ' ' FROM pnumclt), "")
+evaluates to t 
+expression:(<> TRIM ( BOTH ' ' FROM pnumclt), "000000000")
+evaluates to t 
+expression:
+  (select (nvl (count numcte), 0)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumclt))
+evaluates to 0.0000000000000000 ; 
+let iexistec = 0.0000000000000000 
+expression:(or (= iexistec, 0), (null iexistec))
+evaluates to t 
+let ccodret = 00100 
+expression:ccodret
+evaluates to 00100 
+procedure sp_registra_evento returns 00100 
+
+expression:(<procedure> bdimnsj:sp_registra_evento, "1", ccontratocorreo, cplantilla, vcliente, "", "", "2", vfechacapturaacl, vfoliocsuac, vtipodictamen, vcuentaenmascarada, vnombrecliente, vpredictamen1, vfechanotifacion, vpredictamen3, vhoradictamen, vpredictamen2, vcorreoelec, "", vimportereclamado, 0, 0, 0, 0, <TODAY>, "")
+evaluates to 00100 
+let vcodretnotif = 00100 
+expression:(= vcodretnotif, "00000")
+evaluates to f 
+let vdesccorreo = El correo electrÃ³nico de notificaciÃ³n no pudo ser enviado al Cliente. 
+expression:
+  (select pky_resolucion
+    from acl_resolucion
+    where (= nombre, "notificacionCorreoExitoso"))
+evaluates to 30 ; 
+let vaccioncorreo = 30 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdesccorreo, current year to fraction(3), vfoliocsuac, vaccioncorreo, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+let vresultado = Proceso Exitoso 
+
+update acl_cierre_masivo set
+    (fky_estatus_aclaracion) = (vestatusacl),
+    (fky_estatus_corp_analisis) = (vestatusana),
+    (fky_estatus_corp_general) = (vestatuscorp),
+    (proceso) = (vresultado)
+  where (and (= folio_csuac, vfoliocsuac), (= fecha, vfechaactual));
+expression:vresultado
+evaluates to Proceso Exitoso                                    
+expression:vfoliocsuac
+evaluates to 3012241210  
+expression:ccodret
+evaluates to 000    
+procedure sp_aplica_cierre_masivo returns 000    , 3012241210  , Proceso Exitoso                                    
+
+expression:(<procedure> "informix".sp_aplica_cierre_masivo, v_folio_csuac, v_procedente, vcodresolucion, 1, "330646", v_dictamen, v_num_proceso, v_afectacion)
+evaluates to Proceso Exitoso                                    ; 3012241210  ; 000    ; 
+let v_cod_ret = 000    
+let vfoliocsuac = 3012241210  
+let vresultado = Proceso Exitoso                                    
+expression:
+  (select pky_aclaracion, fky_estatus_aclaracion, fky_estatus_corp_general
+    from "informix".acl_aclaracion
+    where (= folio_csuac, v_folio_csuac))
+evaluates to 6 ; 3 ; 2475468 ; 
+let v_pky_aclaracion = 2475468 
+let v_estatus_aclaracion = 3 
+let v_estatus_general = 6 
+expression:(not-null v_pky_aclaracion)
+evaluates to t 
+
+insert into "informix".acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, v_bitacora, current year to fraction(3), v_folio_csuac, 26, v_pky_aclaracion,  <NULL> , v_estatus_aclaracion,  <NULL> , v_estatus_general, 1);
+expression:(not-null v_cod_ret)
+evaluates to t 
+
+commit work;
+exception : looking for handler
+SQL error = -255 ISAM error = 0  error string =  = ""
+exception : handler FOUND
+select cursor iteration.
+select cursor returns 0303250002 , < Solicitud no procede ya que la transacciï¿½n fue reversada por lo que no hubo cargo a cliente.(28-OCT-2024 / MLL) , Cierre masivo aplicado el 2025-04-07 18:38:06.000 por proceso automatizado. , 0 , 1 , 1 
+expression:(= v_procede, "1")
+evaluates to f 
+expression:(= v_procede, "0")
+evaluates to t 
+let v_procedente = 0 
+expression:
+  (select pky_tipo_codigo_resolucion
+    from acl_tipo_codigo_resolucion
+    where (and (= pky_tipo_codigo_resolucion, TRIM ( BOTH ' ' FROM vcodresolucion)), (= tipo_procedente, v_procedente)))
+evaluates to 1 ; 
+let v_resolucion = 1 
+expression:(or (null v_folio_csuac), (= v_folio_csuac, ""))
+evaluates to f 
+
+execute function informix.equal[procid=-114] (   = < Solicitud no procede ya que la transacciï¿½n fue reversada por lo que no hubo cargo a cliente.(28-OCT-2024 / MLL) ,    =  )
+expression:(or (null v_dictamen), (= v_dictamen, ""))
+evaluates to f 
+
+execute function informix.equal[procid=-114] (   = Cierre masivo aplicado el 2025-04-07 18:38:06.000 por proceso automatizado. ,    =  )
+expression:(or (null v_bitacora), (= v_bitacora, ""))
+evaluates to f 
+expression:(or (null v_procedente), (= v_procedente, ""))
+evaluates to f 
+expression:(or (null v_resolucion), (= v_resolucion, ""))
+evaluates to NULL. 
+expression:(not-null v_folio_csuac)
+evaluates to t 
+
+execute function informix.sp_aplica_cierre_masivo[procid=2405] ( pfolio = 0303250002       ,  pprocede = 0  ,  presolucion = 1 ,  popcion = 1 ,  pempleado = 330646 ,  ppredictamen = < Solicitud no procede ya que la transacciï¿½n fue reversada por lo que no hubo cargo a cliente.(28-OCT-2024 / MLL) ,  pnumproceso = 50 ,  pafectacion = 1 )
+expression:
+  (select current year to fraction(3)
+    from systables
+    where (= tabid, 1))
+evaluates to 2025-04-07 20:47:32.000 ; 
+let vfechaactual = 2025-04-07 20:47:32.000 
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+expression:
+  (select pky_resolucion, descripcion
+    from acl_resolucion
+    where (= nombre, "iniciocierreMasivo"))
+evaluates to Inicia Cierre Masivo del Folio ; 115 ; 
+let vaccioniniciocierre = 115 
+let vdescripcionaccion = Inicia Cierre Masivo del Folio 
+expression:
+  (select pky_usuario
+    from acl_usuario
+    where (and (= num_empleado, pempleado), (= pky_usuario, "1")))
+evaluates to 1 ; 
+let vidususario = 1 
+expression:(= popcion, 1)
+evaluates to t 
+expression:
+  (select folio_csuac
+    from acl_aclaracion
+    where (= folio_csuac, pfolio))
+evaluates to 0303250002 ; 
+let vfoliocsuac = 0303250002 
+expression:(null vfoliocsuac)
+evaluates to f 
+expression:
+  (select fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, pky_aclaracion, fky_area, importereclamado, fechacaptura, num_cliente
+    from acl_aclaracion
+    where (= folio_csuac, vfoliocsuac))
+evaluates to 021916115 ; 03/03/2025 ; $100.00 ; NULL. ; 2475467 ; NULL. ; 73 ; 1 ; 
+let vestatusaclinicial = 1 
+let vestatusanainicial = 73 
+let vestatuscorpinicial = NULL. 
+let vidaclaracion = 2475467 
+let vareaacl = NULL. 
+let vimportereclamado = $100.00 
+let vfechacapturaacl = 03/03/2025 
+let vcliente = 021916115 
+expression:(not-null vaccioniniciocierre)
+evaluates to t 
+expression:(|| (|| TRIM ( BOTH ' ' FROM vdescripcionaccion), ": "), vfoliocsuac)
+evaluates to Inicia Cierre Masivo del Folio: 0303250002  
+let vdescripcionaccion = Inicia Cierre Masivo del Folio: 0303250002  
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescripcionaccion, current year to fraction(3), vfoliocsuac, vaccioniniciocierre, vidaclaracion, vareaacl, vestatusaclinicial, vestatusanainicial, vestatuscorpinicial, vidususario);
+expression:(>= vestatusaclinicial, 3)
+evaluates to f 
+expression:
+  (select pky_estatus_corporativo, fky_accion
+    from acl_estatus_corporativo
+    where (and (= nombre, "PREDICTAMINADA"), (= activo, 1)))
+evaluates to 9 ; 5 ; 
+let vpredictamenestatuscorp = 5 
+let vaccionpredictamen = 9 
+expression:(<procedure> replace, (<procedure> replace, ppredictamen, (<procedure> chr, 13), ""), (<procedure> chr, 10), "")
+evaluates to < Solicitud no procede ya que la transacciï¿½n fue reversada por lo que no hubo cargo a cliente.(28-OCT-2024 / MLL) 
+let ppredictamen = < Solicitud no procede ya que la transacciï¿½n fue reversada por lo que no hubo cargo a cliente.(28-OCT-2024 / MLL) 
+
+update acl_aclaracion set
+    (montoprocedente) = (vimportereclamado),
+    (predictamen) = (ppredictamen),
+    (procede) = (pprocede),
+    (fky_estatus_corp_general) = (vpredictamenestatuscorp),
+    (fky_tipo_codigo_resolucion) = (presolucion)
+  where (= folio_csuac, vfoliocsuac);
+expression:
+  (select fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general
+    from acl_aclaracion
+    where (= folio_csuac, vfoliocsuac))
+evaluates to 5 ; 73 ; 1 ; 
+let vestatusacl = 1 
+let vestatusana = 73 
+let vestatuscorp = 5 
+let vresultado = Predictaminado 
+
+insert into acl_cierre_masivo(fecha, folio, tipo_archivo, folio_csuac, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, afectacion, proceso, num_proceso)
+  values (vfechaactual, pfolio, popcion, vfoliocsuac, vestatusacl, vestatusana, vestatuscorp, vafectacion, vresultado, pnumproceso);
+expression:
+  (select pky_usuario
+    from acl_usuario
+    where (and (= num_empleado, pempleado), (= pky_usuario, "1")))
+evaluates to 1 ; 
+let vidususario = 1 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, ppredictamen, current year to fraction(3), vfoliocsuac, vaccionpredictamen, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:
+  (select pky_resolucion
+    from acl_resolucion
+    where (= nombre, "autorizarAbono"))
+evaluates to 3 ; 
+let vaccionabono = 3 
+expression:
+  (select 1
+    from acl_movimiento
+    where (and (and (and (= fky_aclaracion, vidaclaracion), (= exitoso, 1)), (= duplicado, 0)), (null fky_padre)))
+evaluates to NULL. ; 
+let vabonotemporal = NULL. 
+expression:(= pafectacion, "1")
+evaluates to t 
+expression:(= vabonotemporal, 1)
+evaluates to NULL. 
+expression:(= pprocede, 1)
+evaluates to f 
+expression:(= pprocede, 0)
+evaluates to t 
+expression:
+  (select te.costo
+    from acl_aclaracion as acl, acl_tipo_evento as te
+    where (= pky_aclaracion, vidaclaracion))
+evaluates to $0.00 ; 
+let vcostocomision = $0.00 
+expression:(> vcostocomision, 0)
+evaluates to f 
+let vafectacion = Si 
+let vindicadorafectacion = 1 
+expression:
+  (select current year to fraction(3)
+    from systables
+    where (= tabid, 1))
+evaluates to 2025-04-07 20:47:32.000 ; 
+let vfechadictamen = 2025-04-07 20:47:32.000 
+expression:
+  (select nombre1, nombre2, apell_paterno, apell_materno
+    from bdinteg:si_cliente
+    where (= numcte, vcliente))
+evaluates to NULL. ; NULL. ; NULL. ; NULL. ; 
+let vnombre1 = NULL. 
+let vnombre2 = NULL. 
+let vapellpaterno = NULL. 
+let vapellmaterno = NULL. 
+expression:(= pprocede, 1)
+evaluates to f 
+expression:(= pprocede, 1)
+evaluates to f 
+expression:(|| (|| (|| (|| (|| (|| TRIM ( BOTH ' ' FROM (nvl vnombre1, "")), " "), TRIM ( BOTH ' ' FROM (nvl vnombre2, ""))), " "), TRIM ( BOTH ' ' FROM (nvl vapellpaterno, ""))), " "), TRIM ( BOTH ' ' FROM (nvl vapellmaterno, "")))
+evaluates to     
+let vnombrecliente =     
+expression:(|| (|| TRIM ( BOTH ' ' FROM (nvl vnombre1, "")), " "), TRIM ( BOTH ' ' FROM (nvl vnombre2, "")))
+evaluates to   
+let v_nombre =   
+expression:(|| (|| TRIM ( BOTH ' ' FROM (nvl vapellpaterno, "")), " "), TRIM ( BOTH ' ' FROM (nvl vapellmaterno, "")))
+evaluates to   
+let v_apellidos =   
+
+execute function bdinteg:informix.sp_consulta_correos[procid=5617] ( pempresa = 001 ,  pnumcte = 021916115 ,  ptipocorreo = 1 ,  pconsulta = 0 )
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+expression:(or (or (or (or (null pempresa), (= pempresa, "")), (or (null pnumcte), (= pnumcte, ""))), (or (null ptipocorreo), (= ptipocorreo, 0))), (or (null pconsulta), (= pconsulta, "")))
+evaluates to f 
+expression:
+  (select (count *)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumcte))
+evaluates to 0 ; 
+let vexistecte = 0 
+expression:(= vexistecte, 0)
+evaluates to t 
+let vcodret1 = 104 
+expression:vstatuscorreo
+evaluates to   
+expression:vtipocorreo
+evaluates to 0 
+expression:vcorreoelec
+evaluates to                                                                                                      
+expression:vcodret1
+evaluates to 104   
+procedure sp_consulta_correos returns 104   ,                                                                                                      , 0 ,   
+
+expression:(<procedure> bdinteg:sp_consulta_correos, "001", vcliente, "1", "0")
+evaluates to   ; 0 ;                                                                                                      ; 104   ; 
+let vcodretdatoscte = 104   
+let vcorreoelec =                                                                                                      
+let vtipocorreo = 0 
+let vstatuscorreo =   
+
+execute function bdinteg:informix.sp_consulta_telefonos[procid=5618] ( pempresa = 001 ,  pnumcte = 021916115 ,  ptipotel = 2 ,  pconsulta = 0 )
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+expression:(or (or (or (null pempresa), (= pempresa, "")), (or (null pnumcte), (= pnumcte, ""))), (or (null ptipotel), (= ptipotel, 0)))
+evaluates to f 
+expression:
+  (select (count *)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumcte))
+evaluates to 0 ; 
+let vexistecte = 0 
+expression:(= vexistecte, 0)
+evaluates to t 
+let vcodret1 = 104 
+expression:statusvalidacion
+evaluates to 0 
+expression:vnombrecarrier
+evaluates to                                
+expression:vcarrier
+evaluates to 0 
+expression:vextension
+evaluates to       
+expression:vstatus_tel
+evaluates to   
+expression:vsecuencia
+evaluates to 0 
+expression:vtipotel
+evaluates to 0 
+expression:vtelefono
+evaluates to               
+expression:vcodret1
+evaluates to 104   
+procedure sp_consulta_telefonos returns 104   ,               , 0 , 0 ,   ,       , 0 ,                                , 0 
+
+expression:(<procedure> bdinteg:sp_consulta_telefonos, "001", vcliente, "2", "0")
+evaluates to 0 ;                      ; 0 ;       ;   ; 0 ; 0 ;               ; 104   ; 
+let vcodretdatoscte = 104   
+let vtelefono =               
+let vtipotel = 0 
+let vsecuencia = 0 
+let vstatus_tel =   
+let vextension =       
+let vcarrier = 0 
+let vnombrecarrier =                      
+let statusvalidacion = 0 
+expression:
+  (select tpro.tipo_producto, pro.numero_cuenta, tpro.producto
+    from acl_aclaracion as acl, acl_producto as pro, acl_tipo_producto as tpro
+    where (= pky_aclaracion, vidaclaracion))
+evaluates to 2000 ; 10504121408 ; 2 ; 
+let vtipoproducto = 2 
+let vcuenta = 10504121408 
+let v_producto = 2000 
+expression:(not-null vdictamen)
+evaluates to f 
+expression:(= pafectacion, "1")
+evaluates to t 
+expression:(= vindicadorafectacion, 1)
+evaluates to t 
+expression:
+  (select pky_resolucion, descripcion
+    from acl_resolucion
+    where (= nombre, caccionafectacion))
+evaluates to Se afectó el movimiento, ; 23 ; 
+let vaccionafectacion = 23 
+let vdescafectacion = Se afectó el movimiento, 
+expression:
+  (select pky_estatus_corporativo
+    from acl_estatus_corporativo
+    where (and (= nombre, "DICTAMEN_ACEPTADA"), (= activo, 1)))
+evaluates to 6 ; 
+let vdictamenestatuscorp = 6 
+expression:
+  (select pky_estatus_aclaracion
+    from acl_estatus_aclaracion
+    where (= nombre, "ACLARACION_CON_DICTAMEN_NO_DIGITALIZADO"))
+evaluates to 3 ; 
+let vdictamenestatusacl = 3 
+expression:
+  (select current year to fraction(3)
+    from systables
+    where (= tabid, 1))
+evaluates to 2025-04-07 20:47:32.000 ; 
+let vfechadictamen = 2025-04-07 20:47:32.000 
+expression:(+ (- (date vfechadictamen), vfechacapturaacl), 1)
+evaluates to 36 
+let vdiasconclusion = 36 
+
+update acl_cierre_masivo set
+    (afectacion) = (vafectacion)
+  where (and (= folio_csuac, vfoliocsuac), (= fecha, vfechaactual));
+
+update acl_aclaracion set
+    (fecha_dictamen) = (vfechadictamen),
+    (fky_estatus_aclaracion) = (vdictamenestatusacl),
+    (fky_estatus_corp_general) = (vdictamenestatuscorp),
+    (dias_conclusion) = (vdiasconclusion)
+  where (= folio_csuac, vfoliocsuac);
+
+before actions:
+
+end before actions
+
+for each row actions: 
+
+end for each row actions
+
+after actions:
+
+end after actions
+expression:
+  (select fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general
+    from acl_aclaracion
+    where (= folio_csuac, vfoliocsuac))
+evaluates to 6 ; 73 ; 3 ; 
+let vestatusacl = 3 
+let vestatusana = 73 
+let vestatuscorp = 6 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescafectacion, current year to fraction(3), vfoliocsuac, vaccionafectacion, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:
+  (select pky_resolucion, descripcion
+    from acl_resolucion
+    where (= nombre, "autorizarPredictamen"))
+evaluates to Autoriza el predictamen. ; 16 ; 
+let vacciondictamen = 16 
+let vdescdictamen = Autoriza el predictamen. 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescdictamen, current year to fraction(3), vfoliocsuac, vacciondictamen, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:
+  (select pky_resolucion, descripcion
+    from acl_resolucion
+    where (= nombre, "cierreMasivo"))
+evaluates to Proceso de Cierre Masivo por Incremento de volumen ; 116 ; 
+let vacciondictamen = 116 
+let vdescdictamen = Proceso de Cierre Masivo por Incremento de volumen 
+expression:(|| (|| TRIM ( BOTH ' ' FROM vdescdictamen), " "), pnumproceso)
+evaluates to Proceso de Cierre Masivo por Incremento de volumen 50 
+let vdescdictamen = Proceso de Cierre Masivo por Incremento de volumen 50 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescdictamen, current year to fraction(3), vfoliocsuac, vacciondictamen, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:(or (not-null vtelefono), (<> vtelefono, ""))
+evaluates to t 
+
+execute function bdimnsj:informix.sp_registra_evento[procid=2690] ( ptipomsj = 2 ,  pidmsj = ACL_SMS    ,  pidplantilla = ACL_SMS      ,  pnumclt = 021916115 ,  pnumcta =                      ,  pnumtarjeta =                  ,  ptipoproc = 2 ,  pstr1 = 03/03/2025                     ,  pstr2 = 0303250002  ,  pstr3 = NULL. ,  pstr4 =                                ,  pstr5 =                                                                                                                                                        ,  pstr6 =                                                                                                      ,  pstr7 =                                                              ,  pstr8 =                                                              ,  pstr9 =                 ,  pstr10 =                                                                                                      ,  pcorreo_alterno =                                                                                                      ,  pcelular_alterno =               ,  pimporte1 = $0.00 ,  pimporte2 = $0.00 ,  pimporte3 = $0.00 ,  pimporte4 = $0.00 ,  pimporte5 = $0.00 ,  pfecha1 = 2025-04-07 00:00:00.000 ,  pfecha2 = NULL. )
+let ccodret = 00000 
+let iexiste = 0 
+let iexiste2 = 0 
+let iexiste3 = 0 
+let iexistec = 0 
+let vsqlerr = 0 
+let vnumcte =  
+let cdia =  
+let canio =  
+let cmes =  
+let cmes1 =  
+let cfechah =  
+let vpermiteinsertar =  
+let bandera =  
+let cstr1 =  
+let cstr5 =  
+let ccodalerta =  
+let iactinac = 0 
+let iprioridad = 0 
+
+set lock mode to wait 3;
+
+set isolation to dirty read;
+expression:
+  (select valor
+    from mnsj_param
+    where (= cod_param, "5"))
+evaluates to 1                                                                                                    ; 
+let bandera = 1                                                                                                    
+expression:(= TRIM ( BOTH ' ' FROM bandera), "0")
+evaluates to f 
+expression:(or (or (or (or (null ptipomsj), (= ptipomsj, "")), (or (null pidmsj), (= pidmsj, ""))), (or (null ptipoproc), (= ptipoproc, ""))), (or (null pidplantilla), (= pidplantilla, "")))
+evaluates to f 
+expression:(or (> ptipoproc, "2"), (= ptipoproc, "0"))
+evaluates to f 
+expression:(or (> ptipomsj, "3"), (= ptipomsj, "0"))
+evaluates to f 
+expression:(and (and (or (null pnumclt), (= pnumclt, "")), (or (null pnumcta), (= pnumcta, ""))), (or (null pnumtarjeta), (= pnumtarjeta, "")))
+evaluates to f 
+expression:(or (= pidmsj, "POS_CREDE"), (= pidmsj, "ATM_CREDE"))
+evaluates to f 
+expression:(in pidmsj, "SPEI_SMREC", "SPEI_TRREC")
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_SMS"), (= pidplantilla, "NOT_MOV_TJT")), (= pstr7, "Cuenta"))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_SMS"), (= pidplantilla, "NOT_MOV_TJT")), (or (or (= pstr7, "Tarjeta"), (= pstr7, "Tarjeta de Credito")), (= pstr7, "Tarjeta de Debito")))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_EMAIL"), (= pidplantilla, "NOT_INT_MOVI")), (= pstr7, "Cuenta"))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_EMAIL"), (= pidplantilla, "NOT_INT_MOVI")), (or (or (= pstr7, "Tarjeta"), (= pstr7, "Tarjeta de Credito")), (= pstr7, "Tarjeta de Debito")))
+evaluates to f 
+expression:(<> (substring pidmsj, 1, 3), "WEB")
+evaluates to t 
+expression:(<> TRIM ( BOTH ' ' FROM pnumclt), "")
+evaluates to t 
+expression:(<> TRIM ( BOTH ' ' FROM pnumclt), "000000000")
+evaluates to t 
+expression:
+  (select (nvl (count numcte), 0)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumclt))
+evaluates to 0.0000000000000000 ; 
+let iexistec = 0.0000000000000000 
+expression:(or (= iexistec, 0), (null iexistec))
+evaluates to t 
+let ccodret = 00100 
+expression:ccodret
+evaluates to 00100 
+procedure sp_registra_evento returns 00100 
+
+expression:(<procedure> bdimnsj:sp_registra_evento, "2", ccontratosms, cplantilla, vcliente, "", "", "2", vfechacapturaacl, vfoliocsuac, vtipodictamen, "", "", "", "", "", "", "", "", vtelefono, 0, 0, 0, 0, 0, <TODAY>, "")
+evaluates to 00100 
+let vcodretnotif = 00100 
+expression:(= vcodretnotif, "00000")
+evaluates to f 
+let vdescsms = El mensaje de texto de notificaciÃ³n no pudo ser enviado al Cliente. 
+expression:
+  (select pky_resolucion
+    from acl_resolucion
+    where (= nombre, "notificacionSMSFallido"))
+evaluates to 31 ; 
+let vaccionsms = 31 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescsms, current year to fraction(3), vfoliocsuac, vaccionsms, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:(or (not-null vcorreoelec), (<> vcorreoelec, ""))
+evaluates to t 
+expression:(substring ppredictamen, 1, 100)
+evaluates to < Solicitud no procede ya que la transacciï¿½n fue reversada por lo que no hubo cargo a cliente.(28- 
+let vpredictamen1 = < Solicitud no procede ya que la transacciï¿½n fue reversada por lo que no hubo cargo a cliente.(28- 
+expression:(substring ppredictamen, 101, 200)
+evaluates to OCT-2024 / MLL) 
+let vpredictamen2 = OCT-2024 / MLL) 
+expression:(substring ppredictamen, 201, 250)
+evaluates to NULL. 
+let vpredictamen3 = NULL. 
+expression:(<procedure> to_char, (extend current year to fraction(3) hour to minute), "%H:%M")
+evaluates to 20:47 
+let vhoradictamen = 20:47 
+expression:(<procedure> to_char, current year to fraction(3), "%d/%m/%Y")
+evaluates to 07/04/2025 
+let vfechanotifacion = 07/04/2025 
+expression:(<procedure> lpad, (<procedure> right, vcuenta, 4), (<procedure> length, vcuenta), "X")
+evaluates to XXXXXXX1408 
+let vcuentaenmascarada = XXXXXXX1408 
+expression:(nvl vpredictamen1, "")
+evaluates to < Solicitud no procede ya que la transacciï¿½n fue reversada por lo que no hubo cargo a cliente.(28- 
+let vpredictamen1 = < Solicitud no procede ya que la transacciï¿½n fue reversada por lo que no hubo cargo a cliente.(28- 
+expression:(nvl vpredictamen2, "")
+evaluates to OCT-2024 / MLL) 
+let vpredictamen2 = OCT-2024 / MLL) 
+expression:(nvl vpredictamen3, "")
+evaluates to  
+let vpredictamen3 =  
+
+execute function bdimnsj:informix.sp_registra_evento[procid=2690] ( ptipomsj = 1 ,  pidmsj = ACL_EMAIL  ,  pidplantilla = ACL_SMS      ,  pnumclt = 021916115 ,  pnumcta =                      ,  pnumtarjeta =                  ,  ptipoproc = 2 ,  pstr1 = 03/03/2025                     ,  pstr2 = 0303250002  ,  pstr3 = NULL. ,  pstr4 = XXXXXXX1408                    ,  pstr5 =                                                                                                                                                        ,  pstr6 = < Solicitud no procede ya que la transacciï¿½n fue reversada por lo que no hubo cargo a cliente.(28- ,  pstr7 = 07/04/2025      ,  pstr8 =                                                              ,  pstr9 = 20:47      ,  pstr10 = OCT-2024 / MLL)                                                                                      ,  pcorreo_alterno =                                                                                                      ,  pcelular_alterno =            ,  pimporte1 = $100.00 ,  pimporte2 = $0.00 ,  pimporte3 = $0.00 ,  pimporte4 = $0.00 ,  pimporte5 = $0.00 ,  pfecha1 = 2025-04-07 00:00:00.000 ,  pfecha2 = NULL. )
+let ccodret = 00000 
+let iexiste = 0 
+let iexiste2 = 0 
+let iexiste3 = 0 
+let iexistec = 0 
+let vsqlerr = 0 
+let vnumcte =  
+let cdia =  
+let canio =  
+let cmes =  
+let cmes1 =  
+let cfechah =  
+let vpermiteinsertar =  
+let bandera =  
+let cstr1 =  
+let cstr5 =  
+let ccodalerta =  
+let iactinac = 0 
+let iprioridad = 0 
+
+set lock mode to wait 3;
+
+set isolation to dirty read;
+expression:
+  (select valor
+    from mnsj_param
+    where (= cod_param, "5"))
+evaluates to 1                                                                                                    ; 
+let bandera = 1                                                                                                    
+expression:(= TRIM ( BOTH ' ' FROM bandera), "0")
+evaluates to f 
+expression:(or (or (or (or (null ptipomsj), (= ptipomsj, "")), (or (null pidmsj), (= pidmsj, ""))), (or (null ptipoproc), (= ptipoproc, ""))), (or (null pidplantilla), (= pidplantilla, "")))
+evaluates to f 
+expression:(or (> ptipoproc, "2"), (= ptipoproc, "0"))
+evaluates to f 
+expression:(or (> ptipomsj, "3"), (= ptipomsj, "0"))
+evaluates to f 
+expression:(and (and (or (null pnumclt), (= pnumclt, "")), (or (null pnumcta), (= pnumcta, ""))), (or (null pnumtarjeta), (= pnumtarjeta, "")))
+evaluates to f 
+expression:(or (= pidmsj, "POS_CREDE"), (= pidmsj, "ATM_CREDE"))
+evaluates to f 
+expression:(in pidmsj, "SPEI_SMREC", "SPEI_TRREC")
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_SMS"), (= pidplantilla, "NOT_MOV_TJT")), (= pstr7, "Cuenta"))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_SMS"), (= pidplantilla, "NOT_MOV_TJT")), (or (or (= pstr7, "Tarjeta"), (= pstr7, "Tarjeta de Credito")), (= pstr7, "Tarjeta de Debito")))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_EMAIL"), (= pidplantilla, "NOT_INT_MOVI")), (= pstr7, "Cuenta"))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_EMAIL"), (= pidplantilla, "NOT_INT_MOVI")), (or (or (= pstr7, "Tarjeta"), (= pstr7, "Tarjeta de Credito")), (= pstr7, "Tarjeta de Debito")))
+evaluates to f 
+expression:(<> (substring pidmsj, 1, 3), "WEB")
+evaluates to t 
+expression:(<> TRIM ( BOTH ' ' FROM pnumclt), "")
+evaluates to t 
+expression:(<> TRIM ( BOTH ' ' FROM pnumclt), "000000000")
+evaluates to t 
+expression:
+  (select (nvl (count numcte), 0)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumclt))
+evaluates to 0.0000000000000000 ; 
+let iexistec = 0.0000000000000000 
+expression:(or (= iexistec, 0), (null iexistec))
+evaluates to t 
+let ccodret = 00100 
+expression:ccodret
+evaluates to 00100 
+procedure sp_registra_evento returns 00100 
+
+expression:(<procedure> bdimnsj:sp_registra_evento, "1", ccontratocorreo, cplantilla, vcliente, "", "", "2", vfechacapturaacl, vfoliocsuac, vtipodictamen, vcuentaenmascarada, vnombrecliente, vpredictamen1, vfechanotifacion, vpredictamen3, vhoradictamen, vpredictamen2, vcorreoelec, "", vimportereclamado, 0, 0, 0, 0, <TODAY>, "")
+evaluates to 00100 
+let vcodretnotif = 00100 
+expression:(= vcodretnotif, "00000")
+evaluates to f 
+let vdesccorreo = El correo electrÃ³nico de notificaciÃ³n no pudo ser enviado al Cliente. 
+expression:
+  (select pky_resolucion
+    from acl_resolucion
+    where (= nombre, "notificacionCorreoExitoso"))
+evaluates to 30 ; 
+let vaccioncorreo = 30 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdesccorreo, current year to fraction(3), vfoliocsuac, vaccioncorreo, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+let vresultado = Proceso Exitoso 
+
+update acl_cierre_masivo set
+    (fky_estatus_aclaracion) = (vestatusacl),
+    (fky_estatus_corp_analisis) = (vestatusana),
+    (fky_estatus_corp_general) = (vestatuscorp),
+    (proceso) = (vresultado)
+  where (and (= folio_csuac, vfoliocsuac), (= fecha, vfechaactual));
+expression:vresultado
+evaluates to Proceso Exitoso                                    
+expression:vfoliocsuac
+evaluates to 0303250002  
+expression:ccodret
+evaluates to 000    
+procedure sp_aplica_cierre_masivo returns 000    , 0303250002  , Proceso Exitoso                                    
+
+expression:(<procedure> "informix".sp_aplica_cierre_masivo, v_folio_csuac, v_procedente, vcodresolucion, 1, "330646", v_dictamen, v_num_proceso, v_afectacion)
+evaluates to Proceso Exitoso                                    ; 0303250002  ; 000    ; 
+let v_cod_ret = 000    
+let vfoliocsuac = 0303250002  
+let vresultado = Proceso Exitoso                                    
+expression:
+  (select pky_aclaracion, fky_estatus_aclaracion, fky_estatus_corp_general
+    from "informix".acl_aclaracion
+    where (= folio_csuac, v_folio_csuac))
+evaluates to 6 ; 3 ; 2475467 ; 
+let v_pky_aclaracion = 2475467 
+let v_estatus_aclaracion = 3 
+let v_estatus_general = 6 
+expression:(not-null v_pky_aclaracion)
+evaluates to t 
+
+insert into "informix".acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, v_bitacora, current year to fraction(3), v_folio_csuac, 26, v_pky_aclaracion,  <NULL> , v_estatus_aclaracion,  <NULL> , v_estatus_general, 1);
+expression:(not-null v_cod_ret)
+evaluates to t 
+
+commit work;
+exception : looking for handler
+SQL error = -255 ISAM error = 0  error string =  = ""
+exception : handler FOUND
+select cursor iteration.
+end cursor
+let v_cod_ret = 00000 
+expression:v_cod_ret
+evaluates to 00000  
+procedure sp_cierres_masivos_afectacion_2 returns 00000  
+
+iteration of cursory procedure sp_cierres_masivos_afectacion_2

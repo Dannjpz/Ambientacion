@@ -1,9 +1,7 @@
-
-
-
-
-
-
+DROP PROCEDURE IF EXISTS "informix".sp_calculaintaclaraciones(  DATE, 
+                                                        DATE, 
+                                                          CHAR(20), 
+                                                           MONEY(18,2) );
 
 CREATE PROCEDURE "informix".sp_calculaintaclaraciones( pfechaini DATE, 
                                                        pfechafin DATE, 
@@ -96,7 +94,9 @@ RETURNING CHAR(5), MONEY(18,2);
     
     --- SET DEBUG FILE TO "/resplogifx/conciliachq/sp_calculaintaclaraciones.out";
     --- TRACE ON;
-    
+    --SET DEBUG FILE TO "/resplogifx/Dann/sp_calculaintaclaraciones.out";
+	--TRACE ON;
+
     SET ISOLATION TO DIRTY READ;
     
     IF ( pfechaini is null OR pfechaini = '' OR pfechafin is null OR pfechafin = '' OR pfechafin <= pfechaini ) OR 
@@ -174,7 +174,7 @@ RETURNING CHAR(5), MONEY(18,2);
     SELECT valor 
       INTO vbase_excenta
       FROM sc_param
-	 WHERE empresa = pempresa 
+	 WHERE empresa =  vempresa--pempresa 
        AND codparam = "baseexenta"; 
 	
     IF vbase_excenta IS NULL THEN

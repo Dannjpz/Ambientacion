@@ -1,9 +1,4 @@
-
-
-
-
-
-
+DROP PROCEDURE IF EXISTS "informix".sp_incremento_reduccion ( CHAR(3), CHAR(20), INTEGER, DECIMAL(10,2), CHAR(1), DECIMAL(14,2), CHAR(4));
 
 CREATE PROCEDURE "informix".sp_incremento_reduccion (pEmpresa CHAR(3),pCredito CHAR(20),p_meses INTEGER,pTotalMovimiento DECIMAL(10,2),tipo CHAR(1),pbc_score DECIMAL(14,2),pNumTran CHAR(4))
    RETURNING CHAR(6),CHAR (100),DECIMAL(10,2);
@@ -88,6 +83,9 @@ BEGIN
 	END EXCEPTION;   
 	
 --SET DEBUG FILE TO "/informix/Israel/sp_reduccion_linea_ina.out";
+--TRACE ON;
+
+--SET DEBUG FILE TO "/resplogifx/repaclaraciones/sp_incremento_reduccion.out";
 --TRACE ON;
 	
 	SET ISOLATION TO DIRTY READ;

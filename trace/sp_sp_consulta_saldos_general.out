@@ -1,0 +1,205 @@
+trace on
+
+let ccodret = 000000 
+let cmensajeret = Se realizo la consulta correctamente. 
+expression:(nvl TRIM ( BOTH ' ' FROM pempresa), "")
+evaluates to 001 
+let pempresa = 001 
+expression:(nvl TRIM ( BOTH ' ' FROM pnumcredito), "")
+evaluates to 540000000005 
+let pnumcredito = 540000000005 
+expression:(= pempresa, "")
+evaluates to f 
+expression:TRIM ( BOTH ' ' FROM pempresa)
+evaluates to 001 
+let cempresa = 001 
+expression:(= pnumcredito, "")
+evaluates to f 
+expression:TRIM ( BOTH ' ' FROM pnumcredito)
+evaluates to 540000000005 
+let cnumcredito = 540000000005 
+expression:(and (null pempresa), (null pnumcredito))
+evaluates to f 
+expression:
+  (select fecha_hoy
+    from bdicred:"informix".sd_fechas
+    where (= empresa, pempresa))
+evaluates to 04/04/2025 ; 
+let dtfechahoy = 04/04/2025 
+expression:(matches pnumcredito, "68*")
+evaluates to f 
+expression:
+  (select b.cod_prod
+    from bdicred:"informix".sd_maecred as a, bdicred:"informix".sd_tipprod as b
+    where (and (and (and (= a.num_credito, cnumcredito), (= a.empresa, pempresa)), (= a.empresa, b.empresa)), (= a.num_producto, b.abrevia_prod)))
+evaluates to T  ; 
+let ctipcred = T  
+expression:(null ctipcred)
+evaluates to f 
+expression:(null ctipcred)
+evaluates to f 
+expression:(= ccodret, "000000")
+evaluates to t 
+expression:(= ctipcred, "T")
+evaluates to t 
+expression:(= (substring cnumcredito, 1, 2), "78")
+evaluates to f 
+expression:(= vrespaldo, 0)
+evaluates to t 
+expression:
+  (select a.numcte, a.sucursal, a.plazo, a.fecha_apertura, (nvl a.tasa_interes, 0), (- (nvl a.tasa_moratorios, 0), (nvl a.tasa_interes, 0)), a.id_unidad_prod, a.cod_caract_2, c.cod_tipcred, d.num_tarjeta, e.descripcion
+    from bdicred:"informix".sd_maecred as a, bdicred:"informix".sd_definicion as c, bdicred:"informix".sd_tarjeta as d, bdicred:"informix".sd_tipocartera as e
+    where (and (and (and (and (and (and (and (and (and (= c.num_producto, a.num_producto), (= c.empresa, a.empresa)), (= d.num_credito, a.num_credito)), (= d.status_tar, d.status_tar)), (= d.tipo_tarjeta, "T")), (= d.secuencia, 
+      (select (max secuencia)
+        from bdicred:"informix".sd_tarjeta
+        where (and (and (= a.empresa, empresa), (= a.num_credito, num_credito)), (= tipo_tarjeta, "T"))))), (= d.empresa, a.empresa)), (= e.status_cred, a.status_cred)), (= a.num_credito, cnumcredito)), (= a.empresa, cempresa)))
+evaluates to CREDITO ETAPA 1                                              ; 4268070900001084     ; 03 ; NULL. ; NULL. ; 3.000000 ; 14.000000 ; 10/12/2023 ; 0 ; 6700 ; 091370932            ; 
+let cnumcte = 091370932            
+let csucursal = 6700 
+let iplazo = 0 
+let dtfechaorigen = 10/12/2023 
+let dtasainteres = 14.000000 
+let dtasamoratorios = 3.000000 
+let iidunidadprod = NULL. 
+let ccodcaract2 = NULL. 
+let ccodtipcred = 03 
+let cnumtarjeta = 4268070900001084     
+let cdescstatuscred = CREDITO ETAPA 1                                              
+expression:(= (dbinfo-sqlca.sqlerrd2 ), 0)
+evaluates to f 
+expression:(= vrespaldo, 0)
+evaluates to t 
+expression:
+  (select prox_fecha_pago, fecha_ult_pago
+    from bdicred:"informix".sd_maecredanexo
+    where (and (= num_credito, cnumcredito), (= empresa, cempresa)))
+evaluates to NULL. ; 08/19/2023 ; 
+let dtfechaproxpago = 08/19/2023 
+let dtfechaultpago = NULL. 
+expression:
+  (select (nvl sdo_intereses, 0), (nvl sdo_retenido, 0), 0, (nvl sdo_capital, 0), (nvl sdo_cap_insoluto, 0), (nvl monto_vencido, 0), (nvl mto_venc_trasp, 0), (nvl monto_financiado, 0), (nvl monto_otorgado, 0), (nvl cap_tras_no_venci, 0), (- (- (nvl monto_otorgado, 0), (nvl sdo_cap_insoluto, 0)), (nvl sdo_retenido, 0)), 0
+    from bdicred:"informix".sd_maesdos
+    where (and (= num_credito, cnumcredito), (= empresa, cempresa)))
+evaluates to 0 ; 356126.90 ; 0.00 ; 432900.00 ; 5420.00 ; 0.00 ; 0.00 ; 72905.72 ; 72905.72 ; 0 ; 3867.38 ; 365.06 ; 
+let dintdevengado = 365.06 
+let dsdoretenido = 3867.38 
+let dintvig = 0 
+let dcapvig = 72905.72 
+let dsdoactcap = 72905.72 
+let dcaptrans = 0.00 
+let dcapvdoexig = 0.00 
+let dmontofinanciado = 5420.00 
+let dlineaotorgada = 432900.00 
+let dcapvdonoexig = 0.00 
+let dlineadisponible = 356126.90 
+let ipagosrealizados = 0 
+exception : looking for handler
+SQL error = -284 ISAM error = 0  error string =  = ""
+exception : handler FOUND
+expression:(<> isqlerr, 0)
+evaluates to t 
+expression:isqlerr
+evaluates to -284 
+let ccodret = -284 
+expression:(|| (|| "Ocurrio error al consultar los saldos", " - "), cerrorinfo)
+evaluates to Ocurrio error al consultar los saldos -                                                                                  
+let cmensajeret = Ocurrio error al consultar los saldos -                                                                                  
+expression:(nvl TRIM ( BOTH ' ' FROM cdescsitespcred), "")
+evaluates to  
+expression:(nvl ccausacred, 0)
+evaluates to 0 
+expression:(nvl csitcred, "")
+evaluates to   
+expression:(nvl TRIM ( BOTH ' ' FROM cdescsitespcte), "")
+evaluates to  
+expression:(nvl ccausacte, 0)
+evaluates to 0 
+expression:(nvl csitcte, "")
+evaluates to   
+expression:(nvl TRIM ( BOTH ' ' FROM cdesccausabloqueocta), "")
+evaluates to  
+expression:(nvl ccodcaract2, "")
+evaluates to  
+expression:(nvl TRIM ( BOTH ' ' FROM cdescbloqueocta), "")
+evaluates to  
+expression:(nvl iidunidadprod, 0)
+evaluates to 0 
+expression:(nvl cdescstatuscred, "")
+evaluates to CREDITO ETAPA 1                                              
+expression:(nvl dpagosvdos, 0)
+evaluates to 0.00 
+expression:(nvl dlineadisponible, 0)
+evaluates to 356126.90 
+expression:(nvl divaintdevengado, 0)
+evaluates to 0.00 
+expression:(nvl dintdevengado, 0)
+evaluates to 365.06 
+expression:(nvl dsdototalliq, 0)
+evaluates to 0.00 
+expression:(nvl dsdoretenido, 0)
+evaluates to 3867.38 
+expression:(nvl divacom, 0)
+evaluates to 0.00 
+expression:(nvl dcompend, 0)
+evaluates to 0.00 
+expression:(nvl dsdoactivaint, 0)
+evaluates to 0.00 
+expression:(nvl divaintmes, 0)
+evaluates to 0.00 
+expression:(nvl divaintmoratorio, 0)
+evaluates to 0.00 
+expression:(nvl divaintvdo, 0)
+evaluates to 0.00 
+expression:(nvl divaintvig, 0)
+evaluates to 0.00 
+expression:(nvl dsdoactint, 0)
+evaluates to 0.00 
+expression:(nvl dintmes, 0)
+evaluates to 0.00 
+expression:(nvl dintmoratorio, 0)
+evaluates to 0.00 
+expression:(nvl dintvdo, 0)
+evaluates to 0.00 
+expression:(nvl dintvig, 0)
+evaluates to 0.00 
+expression:(nvl dsdoactcap, 0)
+evaluates to 72905.72 
+expression:(nvl dcapvdonoexig, 0)
+evaluates to 0.00 
+expression:(nvl dcapvdoexig, 0)
+evaluates to 0.00 
+expression:(nvl dcaptrans, 0)
+evaluates to 0.00 
+expression:(nvl dcapvig, 0)
+evaluates to 72905.72 
+expression:(nvl dmontosbc, 0)
+evaluates to 200.00 
+expression:(nvl dtasamoratorios, 0)
+evaluates to 3.000000 
+expression:(nvl dtasainteres, 0)
+evaluates to 14.000000 
+expression:(nvl dlineaotorgada, 0)
+evaluates to 432900.00 
+expression:(nvl ipagosrealizados, 0)
+evaluates to 0 
+expression:(nvl iplazo, 0)
+evaluates to 0 
+expression:(nvl dtfechaultpago, (date 1))
+evaluates to 01/01/1900 
+expression:(nvl dpagominimo, 0)
+evaluates to 0.00 
+expression:(nvl dtfechaproxpago, (date 1))
+evaluates to 08/19/2023 
+expression:(nvl dtfechaorigen, (date 1))
+evaluates to 10/12/2023 
+expression:(nvl ccodtipcred, "")
+evaluates to 03 
+expression:cnumcredito
+evaluates to 540000000005         
+expression:cmensajeret
+evaluates to Ocurrio error al consultar los saldos -                                          
+expression:ccodret
+evaluates to -284   
+procedure sp_consulta_saldos_general_fixed returns -284   , Ocurrio error al consultar los saldos -                                          , 540000000005         , 03 , 10/12/2023 , 08/19/2023 , 0.00 , 01/01/1900 , 0 , 0 , 432900.00 , 14.000000 , 3.000000 , 200.00 , 72905.72 , 0.00 , 0.00 , 0.00 , 72905.72 , 0.00 , 0.00 , 0.00 , 0.00 , 0.00 , 0.00 , 0.00 , 0.00 , 0.00 , 0.00 , 0.00 , 0.00 , 3867.38 , 0.00 , 365.06 , 0.00 , 356126.90 , 0.00 , CREDITO ETAPA 1                                              , 0 ,  ,  ,  ,   , 0 ,  ,   , 0 ,  
+
+iteration of cursory procedure sp_consulta_saldos_general_fixed

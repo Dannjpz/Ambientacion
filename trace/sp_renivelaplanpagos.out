@@ -1,0 +1,63 @@
+trace on
+
+let codret = 000 
+
+create temp table renivpagos;
+
+insert into renivpagos
+  select fecha_cuota, 0, 0, 0
+    from sd_pagocapit
+    where (and (and (= empresa, g_empresa), (= num_credito, g_numcredito)), (= status_cuota, "1"));
+expression:
+  (select tasa_interes, 
+    (select (+ a.monto_cuota, b.monto_cuota)
+      from sd_pagocapit as a, sd_paginter as b
+      where (and (and (and (= b.num_credito, a.num_credito), (= b.fecha_cuota, a.fecha_cuota)), (= a.num_credito, g_numcredito)), (= a.fecha_cuota, 
+        (select (min fecha_cuota)
+          from sd_pagocapit as d
+          where (= d.num_credito, g_numcredito))))), plazo, sdo_capital
+    from sd_maecred as a, sd_maesdos as b
+    where (and (and (and (= a.empresa, g_empresa), (= a.num_credito, g_numcredito)), (= b.empresa, a.empresa)), (= b.num_credito, a.num_credito)))
+evaluates to NULL. ; NULL. ; NULL. ; NULL. ; 
+let tasainteres = NULL. 
+let cuotafija = NULL. 
+let vplazo = NULL. 
+let sdocapital = NULL. 
+expression:
+  (select (sum (- saldo_cuota, monto_real_pag))
+    from sd_pagocapit
+    where (and (and (= empresa, g_empresa), (= num_credito, g_numcredito)), (= status_cuota, "1")))
+evaluates to NULL. ; 
+let sdocapital = NULL. 
+expression:(<procedure> round, (+ (/ (/ tasainteres, 100), 12), 1), 6)
+evaluates to NULL. 
+let factor = NULL. 
+start select cursor.
+select fecha, sdocap, capit, inter
+  from renivpagos
+  order by fecha
+select cursor iteration.
+end cursor
+start select cursor.
+select fecha, sdocap, capit, inter
+  from renivpagos
+  order by fecha
+select cursor iteration.
+end cursor
+expression:
+  (select (sum (- monto_cuota, monto_real_pag))
+    from sd_paginter
+    where (and (= empresa, g_empresa), (= num_credito, g_numcredito)))
+evaluates to NULL. ; 
+let sdointeres = NULL. 
+
+update sd_maesdos set
+    (sdo_no_exig) = (sdointeres)
+  where (and (= empresa, g_empresa), (= num_credito, g_numcredito));
+
+drop table renivpagos;
+expression:codret
+evaluates to 000   
+procedure renivelaplanpagos returns 000   
+
+iteration of cursory procedure renivelaplanpagos

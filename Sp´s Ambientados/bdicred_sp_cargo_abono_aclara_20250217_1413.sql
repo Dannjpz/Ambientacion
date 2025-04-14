@@ -1,8 +1,12 @@
-
-
-
-
-
+DROP PROCEDURE IF EXISTS "informix".sp_cargo_abono_aclara(  CHAR(3),
+                                        CHAR(20),
+                                           CHAR(16),
+                                             MONEY(14,2),
+                                           CHAR(8),
+                                          CHAR(4),
+                                          CHAR(4),
+                                         SMALLINT,
+                                        CHAR(16));
 
 
 CREATE PROCEDURE "informix".sp_cargo_abono_aclara(p_Empresa  CHAR(3),
@@ -67,6 +71,8 @@ CREATE PROCEDURE "informix".sp_cargo_abono_aclara(p_Empresa  CHAR(3),
   --SET DEBUG FILE TO "/pisa/sp_cargo_abono_aclara.out";
   --TRACE ON;
 
+	SET DEBUG FILE TO "/resplogifx/Dann/sp_cargo_abono_aclara.out";
+	TRACE ON;
 
    LET CodRet                = "000";
    LET sql_err               = 0;

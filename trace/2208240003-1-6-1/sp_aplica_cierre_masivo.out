@@ -1,0 +1,135 @@
+trace on
+
+
+set isolation to dirty read;
+
+set lock mode to wait 3;
+expression:
+  (select pky_resolucion, descripcion
+    from acl_resolucion
+    where (= nombre, "iniciocierreMasivo"))
+evaluates to Inicia Cierre Masivo del Folio ; 115 ; 
+let vaccioniniciocierre = 115 
+let vdescripcionaccion = Inicia Cierre Masivo del Folio 
+expression:
+  (select pky_usuario
+    from acl_usuario
+    where (and (= num_empleado, pempleado), (= pky_usuario, "1")))
+evaluates to 1 ; 
+let vidususario = 1 
+expression:(= popcion, 1)
+evaluates to t 
+expression:
+  (select folio_csuac
+    from acl_aclaracion
+    where (= folio_csuac, pfolio))
+evaluates to 2208240003 ; 
+let vfoliocsuac = 2208240003 
+expression:(null vfoliocsuac)
+evaluates to f 
+expression:
+  (select fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, pky_aclaracion, fky_area, importereclamado, fechacaptura, num_cliente
+    from acl_aclaracion
+    where (= folio_csuac, vfoliocsuac))
+evaluates to 066001551 ; 08/22/2024 ; $500.00 ; NULL. ; 2475393 ; 6 ; NULL. ; 1 ; 
+let vestatusaclinicial = 1 
+let vestatusanainicial = NULL. 
+let vestatuscorpinicial = 6 
+let vidaclaracion = 2475393 
+let vareaacl = NULL. 
+let vimportereclamado = $500.00 
+let vfechacapturaacl = 08/22/2024 
+let vcliente = 066001551 
+expression:(not-null vaccioniniciocierre)
+evaluates to t 
+expression:(|| (|| TRIM ( BOTH ' ' FROM vdescripcionaccion), ": "), vfoliocsuac)
+evaluates to Inicia Cierre Masivo del Folio: 2208240003  
+let vdescripcionaccion = Inicia Cierre Masivo del Folio: 2208240003  
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescripcionaccion, current year to fraction(3), vfoliocsuac, vaccioniniciocierre, vidaclaracion, vareaacl, vestatusaclinicial, vestatusanainicial, vestatuscorpinicial, vidususario);
+expression:(>= vestatusaclinicial, 3)
+evaluates to f 
+expression:
+  (select pky_estatus_corporativo, fky_accion
+    from acl_estatus_corporativo
+    where (and (= nombre, "PREDICTAMINADA"), (= activo, 1)))
+evaluates to 9 ; 5 ; 
+let vpredictamenestatuscorp = 5 
+let vaccionpredictamen = 9 
+expression:(<procedure> replace, (<procedure> replace, ppredictamen, (<procedure> chr, 13), ""), (<procedure> chr, 10), "")
+evaluates to Solicitud atendida la cuenta se encuentra activa. 
+let ppredictamen = Solicitud atendida la cuenta se encuentra activa. 
+
+update acl_aclaracion set
+    (montoprocedente) = (vimportereclamado),
+    (predictamen) = (ppredictamen),
+    (procede) = (pprocede),
+    (fky_estatus_corp_general) = (vpredictamenestatuscorp),
+    (fky_tipo_codigo_resolucion) = (presolucion)
+  where (= folio_csuac, vfoliocsuac);
+expression:
+  (select fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general
+    from acl_aclaracion
+    where (= folio_csuac, vfoliocsuac))
+evaluates to 5 ; NULL. ; 1 ; 
+let vestatusacl = 1 
+let vestatusana = NULL. 
+let vestatuscorp = 5 
+let vresultado = Predictaminado 
+
+insert into acl_cierre_masivo(fecha, folio, tipo_archivo, folio_csuac, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, afectacion, proceso, num_proceso)
+  values (vfechaactual, pfolio, popcion, vfoliocsuac, vestatusacl, vestatusana, vestatuscorp, vafectacion, vresultado, pnumproceso);
+expression:
+  (select pky_usuario
+    from acl_usuario
+    where (and (= num_empleado, pempleado), (= pky_usuario, "1")))
+evaluates to 1 ; 
+let vidususario = 1 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, ppredictamen, current year to fraction(3), vfoliocsuac, vaccionpredictamen, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:
+  (select pky_resolucion
+    from acl_resolucion
+    where (= nombre, "autorizarAbono"))
+evaluates to 3 ; 
+let vaccionabono = 3 
+expression:
+  (select 1
+    from acl_movimiento
+    where (and (and (and (= fky_aclaracion, vidaclaracion), (= exitoso, 1)), (= duplicado, 0)), (null fky_padre)))
+evaluates to NULL. ; 
+let vabonotemporal = NULL. 
+expression:(= pafectacion, "1")
+evaluates to t 
+expression:(= vabonotemporal, 1)
+evaluates to NULL. 
+expression:(= pprocede, 1)
+evaluates to t 
+let vdictamen = PR 
+expression:
+  (select nombre1, nombre2, apell_paterno, apell_materno
+    from bdinteg:si_cliente
+    where (= numcte, vcliente))
+evaluates to MATERNO                    ; APELLIDO                   ;                            ; NOMBRE                     ; 
+let vnombre1 = NOMBRE                     
+let vnombre2 =                            
+let vapellpaterno = APELLIDO                   
+let vapellmaterno = MATERNO                    
+expression:(= pprocede, 1)
+evaluates to t 
+let vtipodictamen = Procedente 
+expression:(|| (|| (|| (|| (|| (|| TRIM ( BOTH ' ' FROM (nvl vnombre1, "")), " "), TRIM ( BOTH ' ' FROM (nvl vnombre2, ""))), " "), TRIM ( BOTH ' ' FROM (nvl vapellpaterno, ""))), " "), TRIM ( BOTH ' ' FROM (nvl vapellmaterno, "")))
+evaluates to NOMBRE  APELLIDO MATERNO 
+let vnombrecliente = NOMBRE  APELLIDO MATERNO 
+expression:(|| (|| TRIM ( BOTH ' ' FROM (nvl vnombre1, "")), " "), TRIM ( BOTH ' ' FROM (nvl vnombre2, "")))
+evaluates to NOMBRE  
+let v_nombre = NOMBRE  
+expression:(|| (|| TRIM ( BOTH ' ' FROM (nvl vapellpaterno, "")), " "), TRIM ( BOTH ' ' FROM (nvl vapellmaterno, "")))
+evaluates to APELLIDO MATERNO 
+let v_apellidos = APELLIDO MATERNO 
+
+execute function bdinteg:informix.sp_consulta_correos[procid=7730] ( pempresa = 001 ,  pnumcte = 066001551 ,  ptipocorreo = 1 ,  pconsulta = 0 )
+
+set debug file to "/resplogifx/repaclaraciones/ambientacion/sp_consulta_correos.out";

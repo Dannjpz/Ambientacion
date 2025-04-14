@@ -1,8 +1,10 @@
-
-
-
-
-
+DROP PROCEDURE IF EXISTS "informix".cargoref_tc_ofi(  CHAR(3),
+				  CHAR(4),
+				   CHAR(8),
+				   CHAR(20),
+				     DECIMAL(14,2),
+				     CHAR(16),
+				   CHAR(4));
 
 
 CREATE PROCEDURE "informix".cargoref_tc_ofi(o_empresa  CHAR(3),
@@ -97,6 +99,9 @@ LET cMen_retDevol       = "";
 LET dMntoDevol          = 0;
 
 --SET DEBUG FILE TO "/tmp/cargofi.out";
+--TRACE ON;
+
+--SET DEBUG FILE TO "/resplogifx/repaclaraciones/cargoref_tc_ofi.out";
 --TRACE ON;
 
 -- ****************************************************************************
@@ -223,12 +228,12 @@ LET dMntoDevol          = 0;
 
 END PROCEDURE
 DOCUMENT
-'DESCRIPCION: Se modifica para contemplar movimientos diferidos, en el proceso de realizar el cargo al crédito', 
-'AUTOR: Jesús Aguilar ',
+'DESCRIPCION: Se modifica para contemplar movimientos diferidos, en el proceso de realizar el cargo al crï¿½dito', 
+'AUTOR: Jesï¿½s Aguilar ',
 'FECHA: 08 FEBRERO 2012',
 'BD: BDICRED',
-'DESCRIPCION MODIFICACION: Se cambia el proceso para que guarde la transaccion 6837 en los retenidos de los intereses en lugar de la transaccion de disposición',
-'MODIFICO: Mohamed Carreón',
+'DESCRIPCION MODIFICACION: Se cambia el proceso para que guarde la transaccion 6837 en los retenidos de los intereses en lugar de la transaccion de disposiciï¿½n',
+'MODIFICO: Mohamed Carreï¿½n',
 'VERSION: 20120607.0919';
 
 

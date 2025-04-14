@@ -1,0 +1,236 @@
+trace on
+
+expression:
+  (select valor
+    from mnsj_param
+    where (= cod_param, "5"))
+evaluates to 1                                                                                                    ; 
+let bandera = 1                                                                                                    
+expression:(= TRIM ( BOTH ' ' FROM bandera), "0")
+evaluates to f 
+expression:(or (or (or (or (null ptipomsj), (= ptipomsj, "")), (or (null pidmsj), (= pidmsj, ""))), (or (null ptipoproc), (= ptipoproc, ""))), (or (null pidplantilla), (= pidplantilla, "")))
+evaluates to f 
+expression:(or (> ptipoproc, "2"), (= ptipoproc, "0"))
+evaluates to f 
+expression:(or (> ptipomsj, "3"), (= ptipomsj, "0"))
+evaluates to f 
+expression:(and (and (or (null pnumclt), (= pnumclt, "")), (or (null pnumcta), (= pnumcta, ""))), (or (null pnumtarjeta), (= pnumtarjeta, "")))
+evaluates to f 
+expression:(or (= pidmsj, "POS_CREDE"), (= pidmsj, "ATM_CREDE"))
+evaluates to f 
+expression:(in pidmsj, "SPEI_SMREC", "SPEI_TRREC")
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_SMS"), (= pidplantilla, "NOT_MOV_TJT")), (= pstr7, "Cuenta"))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_SMS"), (= pidplantilla, "NOT_MOV_TJT")), (or (or (= pstr7, "Tarjeta"), (= pstr7, "Tarjeta de Credito")), (= pstr7, "Tarjeta de Debito")))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_EMAIL"), (= pidplantilla, "NOT_INT_MOVI")), (= pstr7, "Cuenta"))
+evaluates to f 
+expression:(and (and (= pidmsj, "CUB_EMAIL"), (= pidplantilla, "NOT_INT_MOVI")), (or (or (= pstr7, "Tarjeta"), (= pstr7, "Tarjeta de Credito")), (= pstr7, "Tarjeta de Debito")))
+evaluates to f 
+expression:(<> (substring pidmsj, 1, 3), "WEB")
+evaluates to t 
+expression:(<> TRIM ( BOTH ' ' FROM pnumclt), "")
+evaluates to t 
+expression:(<> TRIM ( BOTH ' ' FROM pnumclt), "000000000")
+evaluates to t 
+expression:
+  (select (nvl (count numcte), 0)
+    from bdinteg:"informix".si_cliente
+    where (= numcte, pnumclt))
+evaluates to 1.0000000000000000 ; 
+let iexistec = 1.0000000000000000 
+expression:(or (= iexistec, 0), (null iexistec))
+evaluates to f 
+expression:(or (= vnumcte, ""), (null vnumcte))
+evaluates to t 
+expression:pnumclt
+evaluates to 066001551            
+let vnumcte = 066001551            
+let vtransaction_id = NULL. 
+expression:
+  (select prioridad
+    from "informix".mnsjr_cat_prioridades
+    where (= id_mensaje, pidmsj))
+evaluates to NULL. ; 
+let iprioridad = NULL. 
+expression:(or (null iprioridad), (= iprioridad, ""))
+evaluates to t 
+let iprioridad = 9 
+expression:
+  (select nombre_tabla
+    from notif_cfg
+    where (and (and (= id_mensaje, pidmsj), (= tipo_mensaje, ptipomsj)), (= tipo_proceso, ptipoproc)))
+evaluates to NULL. ; 
+let vtablanotif = NULL. 
+expression:(or (null vtablanotif), (= vtablanotif, ""))
+evaluates to t 
+expression:
+  (select nombre_tabla
+    from notif_cfg
+    where (and (and (= id_mensaje, "DEFAULT"), (= tipo_mensaje, ptipomsj)), (= tipo_proceso, ptipoproc)))
+evaluates to bdimnsj@lat_tcp:notif_batch_default ; 
+let vtablanotif = bdimnsj@lat_tcp:notif_batch_default 
+expression:
+  (select permite_insertar
+    from notif_cfg
+    where (= nombre_tabla, vtablanotif))
+evaluates to V ; 
+let vpermiteinsertar = V 
+expression:(= vpermiteinsertar, "F")
+evaluates to f 
+expression:(and (in pidmsj, "CUB_EMAIL", "CUB_SMS"), (not-in vnumcte, "", "000000000"))
+evaluates to f 
+expression:(and (and (= ptipoproc, "1"), (= pidmsj, "OFI_AVSMS")), (<> pidplantilla, "OFI_CNCEL3"))
+evaluates to f 
+expression:(null vtransaction_id)
+evaluates to t 
+let vtransaction_id = NULL 
+expression:(or (null pimporte1), (= pimporte1, ""))
+evaluates to NULL. 
+expression:(or (null pimporte2), (= pimporte2, ""))
+evaluates to NULL. 
+expression:(or (null pimporte3), (= pimporte3, ""))
+evaluates to NULL. 
+expression:(or (null pimporte4), (= pimporte4, ""))
+evaluates to NULL. 
+expression:(or (null pimporte5), (= pimporte5, ""))
+evaluates to NULL. 
+expression:(or (null pfecha1), (= pfecha1, ""))
+evaluates to NULL. 
+expression:(|| (|| "'", pfecha1), "'::datetime year to fraction(3)")
+evaluates to '2025-04-10 00:00:00.000'::datetime year to fraction(3) 
+let pfecha1aux = '2025-04-10 00:00:00.000'::datetime year to fraction(3) 
+expression:(or (null pfecha2), (= pfecha2, ""))
+evaluates to t 
+let pfecha2aux = null 
+expression:(null pnumcta)
+evaluates to f 
+expression:(|| (|| "'", TRIM ( BOTH ' ' FROM pnumcta)), "'")
+evaluates to '' 
+let pnumctaaux = '' 
+expression:(null pstr1)
+evaluates to f 
+expression:(null pstr2)
+evaluates to f 
+expression:(null pstr3)
+evaluates to f 
+expression:(null pstr4)
+evaluates to f 
+expression:(null pstr5)
+evaluates to f 
+expression:(null pstr6)
+evaluates to f 
+expression:(null pstr7)
+evaluates to f 
+expression:(null pstr8)
+evaluates to f 
+expression:(null pstr9)
+evaluates to f 
+expression:(null pstr10)
+evaluates to f 
+expression:(null pcorreo_alterno)
+evaluates to f 
+expression:(null pcelular_alterno)
+evaluates to f 
+expression:(null pidplantilla)
+evaluates to f 
+expression:(null vnumcte)
+evaluates to f 
+expression:(null pnumtarjeta)
+evaluates to f 
+expression:(|| (|| "'", TRIM ( BOTH ' ' FROM pnumtarjeta)), "'")
+evaluates to '' 
+let pnumtarjetaaux = '' 
+expression:(or (null iprioridad), (= iprioridad, ""))
+evaluates to NULL. 
+expression:(|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| (|| "INSERT INTO ", vtablanotif), "(tipo_mensaje, id_mensaje,id_plantilla,cliente, cuenta, tarjeta, transaction_id,"), "estatus, fecha_hora_registro, fecha_hora_recuperado, "), "string1, string2, string3, string4, string5, string6, string7, string8, string9, string10,"), "correo_alterno, celular_alterno, importe1, importe2, importe3, importe4, importe5, fecha1, fecha2, prioridad) "), "VALUES ('"), ptipomsj), "','"), pidmsj), "','"), pidplantilla), "','"), vnumcte), "',"), pnumctaaux), ","), pnumtarjetaaux), ","), vtransaction_id), ",null,CURRENT,'','"), pstr1), "','"), pstr2), "','"), pstr3), "','"), pstr4), "','"), pstr5), "','"), pstr6), "','"), pstr7), "','"), pstr8), "','"), pstr9), "','"), pstr10), "','"), pcorreo_alterno), "','"), pcelular_alterno), "','"), pimporte1), "','"), pimporte2), "','"), pimporte3), "','"), pimporte4), "','"), pimporte5), "',"), pfecha1aux), ","), pfecha2aux), ","), iprioridad), ")")
+evaluates to INSERT INTO bdimnsj@lat_tcp:notif_batch_default(tipo_mensaje, id_mensaje,id_plantilla,cliente, cuenta, tarjeta, transaction_id,estatus, fecha_hora_registro, fecha_hora_recuperado, string1, string2, string3, string4, string5, string6, string7, string8, string9, string10,correo_alterno, celular_alterno, importe1, importe2, importe3, importe4, importe5, fecha1, fecha2, prioridad) VALUES ('2','ACL_SMS   ','ACL_SMS     ','066001551           ','','',NULL        ,null,CURRENT,'','08/22/2024                    ','2208240003                    ','Procedente                    ','                              ','                                                                                                                                                      ','                                                                                                    ','                                                            ','                                                            ','               ','                                                                                                    ','                                                                                                    ','5512345678','$0.00','$0.00','$0.00','$0.00','$0.00','2025-04-10 00:00:00.000'::datetime year to fraction(3),null,9) 
+let vinsstmt = INSERT INTO bdimnsj@lat_tcp:notif_batch_default(tipo_mensaje, id_mensaje,id_plantilla,cliente, cuenta, tarjeta, transaction_id,estatus, fecha_hora_registro, fecha_hora_recuperado, string1, string2, string3, string4, string5, string6, string7, string8, string9, string10,correo_alterno, celular_alterno, importe1, importe2, importe3, importe4, importe5, fecha1, fecha2, prioridad) VALUES ('2','ACL_SMS   ','ACL_SMS     ','066001551           ','','',NULL        ,null,CURRENT,'','08/22/2024                    ','2208240003                    ','Procedente                    ','                              ','                                                                                                                                                      ','                                                                                                    ','                                                            ','                                                            ','               ','                                                                                                    ','                                                                                                    ','5512345678','$0.00','$0.00','$0.00','$0.00','$0.00','2025-04-10 00:00:00.000'::datetime year to fraction(3),null,9) 
+expression:vinsstmt
+evaluates to INSERT INTO bdimnsj@lat_tcp:notif_batch_default(tipo_mensaje, id_mensaje,id_plantilla,cliente, cuenta, tarjeta, transaction_id,estatus, fecha_hora_registro, fecha_hora_recuperado, string1, string2, string3, string4, string5, string6, string7, string8, string9, string10,correo_alterno, celular_alterno, importe1, importe2, importe3, importe4, importe5, fecha1, fecha2, prioridad) VALUES ('2','ACL_SMS   ','ACL_SMS     ','066001551           ','','',NULL        ,null,CURRENT,'','08/22/2024                    ','2208240003                    ','Procedente                    ','                              ','                                                                                                                                                      ','                                                                                                    ','                                                            ','                                                            ','               ','                                                                                                    ','                                                                                                    ','5512345678','$0.00','$0.00','$0.00','$0.00','$0.00','2025-04-10 00:00:00.000'::datetime year to fraction(3),null,9) 
+EXECUTE IMMEDIATE INSERT INTO bdimnsj@lat_tcp:notif_batch_default(tipo_mensaje, id_mensaje,id_plantilla,cliente, cuenta, tarjeta, transaction_id,estatus, fecha_hora_registro, fecha_hora_recuperado, string1, string2, string3, string4, string5, string6, string7, string8, string9, string10,correo_alterno, celular_alterno, importe1, importe2, importe3, importe4, importe5, fecha1, fecha2, prioridad) VALUES ('2','ACL_SMS   ','ACL_SMS     ','066001551           ','','',NULL        ,null,CURRENT,'','08/22/2024                    ','2208240003                    ','Procedente                    ','                              ','                                                                                                                                                      ','                                                                                                    ','                                                            ','                                                            ','               ','                                                                                                    ','                                                                                                    ','5512345678','$0.00','$0.00','$0.00','$0.00','$0.00','2025-04-10 00:00:00.000'::datetime year to fraction(3),null,9) 
+
+insert into bdimnsj@lat_tcp:notif_batch_default(tipo_mensaje, id_mensaje, id_plantilla, cliente, cuenta, tarjeta, transaction_id, estatus, fecha_hora_registro, fecha_hora_recuperado, string1, string2, string3, string4, string5, string6, string7, string8, string9, string10, correo_alterno, celular_alterno, importe1, importe2, importe3, importe4, importe5, fecha1, fecha2, prioridad)
+  values ("2", "ACL_SMS   ", "ACL_SMS     ", "066001551           ", "", "",  <NULL> ,  <NULL> , current year to fraction(3), "", "08/22/2024                    ", "2208240003                    ", "Procedente                    ", "                              ", "                                                                                                                                                      ", "                                                                                                    ", "                                                            ", "                                                            ", "               ", "                                                                                                    ", "                                                                                                    ", "5512345678", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "2025-04-10 00:00:00.000"::DATETIME YEAR TO 3,  <NULL> , 9);
+exception : looking for handler
+SQL error = -387 ISAM error = -111  error string =  = "sysusers"
+exception : handler FOUND
+expression:(<> vsqlerr, 0)
+evaluates to t 
+expression:vsqlerr
+evaluates to -387 
+procedure sp_registra_evento returns -387 
+
+expression:(<procedure> bdimnsj:sp_registra_evento, "2", ccontratosms, cplantilla, vcliente, "", "", "2", vfechacapturaacl, vfoliocsuac, vtipodictamen, "", "", "", "", "", "", "", "", vtelefono, 0, 0, 0, 0, 0, <TODAY>, "")
+evaluates to -387  
+let vcodretnotif = -387  
+expression:(= vcodretnotif, "00000")
+evaluates to f 
+let vdescsms = El mensaje de texto de notificación no pudo ser enviado al Cliente. 
+expression:
+  (select pky_resolucion
+    from acl_resolucion
+    where (= nombre, "notificacionSMSFallido"))
+evaluates to 31 ; 
+let vaccionsms = 31 
+
+insert into acl_entrada_bitacora(pky_entrada_bitacora, descripcion, fechahora, folio_csuac, fky_accion, fky_aclaracion, fky_area, fky_estatus_aclaracion, fky_estatus_corp_analisis, fky_estatus_corp_general, fky_usuario)
+  values (entrada_bitacora_seq.nextval, vdescsms, current year to fraction(3), vfoliocsuac, vaccionsms, vidaclaracion, vareaacl, vestatusacl, vestatusana, vestatuscorp, vidususario);
+expression:(or (not-null vcorreoelec), (<> vcorreoelec, ""))
+evaluates to t 
+expression:(substring ppredictamen, 1, 100)
+evaluates to Solicitud atendida la cuenta se encuentra activa. 
+let vpredictamen1 = Solicitud atendida la cuenta se encuentra activa. 
+expression:(substring ppredictamen, 101, 200)
+evaluates to NULL. 
+let vpredictamen2 = NULL. 
+expression:(substring ppredictamen, 201, 250)
+evaluates to NULL. 
+let vpredictamen3 = NULL. 
+expression:(<procedure> to_char, (extend current year to fraction(3) hour to minute), "%H:%M")
+evaluates to 16:39 
+let vhoradictamen = 16:39 
+expression:(<procedure> to_char, current year to fraction(3), "%d/%m/%Y")
+evaluates to 10/04/2025 
+let vfechanotifacion = 10/04/2025 
+expression:(<procedure> lpad, (<procedure> right, vcuenta, 4), (<procedure> length, vcuenta), "X")
+evaluates to XXXXXXX0181 
+let vcuentaenmascarada = XXXXXXX0181 
+expression:(nvl vpredictamen1, "")
+evaluates to Solicitud atendida la cuenta se encuentra activa. 
+let vpredictamen1 = Solicitud atendida la cuenta se encuentra activa. 
+expression:(nvl vpredictamen2, "")
+evaluates to  
+let vpredictamen2 =  
+expression:(nvl vpredictamen3, "")
+evaluates to  
+let vpredictamen3 =  
+exception : looking for handler
+SQL error = -9753 ISAM error = 0  error string =  = ""
+exception : handler FOUND
+expression:sql_err
+evaluates to -9753 
+let ccodret = -9753 
+expression:(null vresultado)
+evaluates to f 
+expression:(|| (|| TRIM ( BOTH ' ' FROM vresultado), "-"), "Proceso Fallido")
+evaluates to Predictaminado-Proceso Fallido 
+let vresultado = Predictaminado-Proceso Fallido 
+expression:(= 
+  (select 1
+    from acl_cierre_masivo
+    where (and (= folio_csuac, vfoliocsuac), (= fecha, vfechaactual))), 1)
+evaluates to t 
+
+update acl_cierre_masivo set
+    (proceso) = (vresultado)
+  where (and (= folio_csuac, vfoliocsuac), (= fecha, vfechaactual));
+expression:vresultado
+evaluates to Predictaminado-Proceso Fallido                     
+expression:vfoliocsuac
+evaluates to 2208240003  
+expression:ccodret
+evaluates to -9753  
+procedure sp_aplica_cierre_masivo returns -9753  , 2208240003  , Predictaminado-Proceso Fallido                     
+

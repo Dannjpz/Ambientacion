@@ -1,8 +1,14 @@
-
-
-
-
-
+DROP PROCEDURE IF EXISTS "informix".principalrefer(  CHAR(3),
+                                        CHAR(20),
+                                            SMALLINT, 
+                                           CHAR(20),
+                                           CHAR(8),
+                                          CHAR(4),
+                                          CHAR,
+                                          CHAR,
+                                          MONEY(14,2),
+                                          MONEY(14,2),
+                                        char(40));
 
 
 CREATE PROCEDURE "informix".principalrefer(p_Empresa  CHAR(3),
@@ -93,6 +99,9 @@ SET LOCK MODE TO WAIT 3;
    
     --SET DEBUG FILE TO "/informix/mahr/principalrefer-"||p_Transacc||".out";     
     --TRACE ON;
+
+   SET DEBUG FILE TO "/resplogifx/Dann/principalrefer.out";
+   TRACE ON;
 
    LET wBegin = "N";
    LET vSdoTdc_Crds 	= 0;

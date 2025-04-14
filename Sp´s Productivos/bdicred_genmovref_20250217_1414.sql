@@ -1,8 +1,12 @@
-
-
-
-
-
+DROP PROCEDURE IF EXISTS "informix".genmovref(
+                   VARCHAR(3),
+               VARCHAR(20),
+              VARCHAR(4),
+                     MONEY(14,2),
+                     VARCHAR(16),
+                  CHAR(4),
+                   CHAR(20),
+                VARCHAR(40));
 
 
 CREATE PROCEDURE "informix".genmovref(
@@ -25,6 +29,9 @@ DEFINE ISAM_ERR    INTEGER;
 DEFINE ERROR_INFO  VARCHAR(80);
 DEFINE vFecHoy     DATE;
 DEFINE vDivisa     CHAR(2);
+
+   --SET DEBUG FILE TO "/resplogifx/repaclaraciones/genmovref.out";
+   --TRACE ON;
 
 
 BEGIN

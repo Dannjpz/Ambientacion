@@ -1,8 +1,4 @@
-
-
-
-
-
+DROP PROCEDURE IF EXISTS "informix".sp_evaldispefec_cred (  CHAR(20),  MONEY(16,2));
 
 
 CREATE PROCEDURE "informix".sp_evaldispefec_cred (pNumCred  CHAR(20), pMontoSol MONEY(16,2)) 	
@@ -92,6 +88,9 @@ SET LOCK MODE TO WAIT 3;
 
 	--SET DEBUG FILE TO '/informix/Rebeca/sp_evaldispefec_cred.out';
     --TRACE ON;
+
+	--SET DEBUG FILE TO "/resplogifx/repaclaraciones/sp_evaldispefec_cred.out";
+	--TRACE ON;
     
 	IF pNumCred IS NULL OR pNumCred = '' THEN 
 		LET cCodRet    = '00003';
